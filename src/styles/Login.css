@@ -1,0 +1,108 @@
+.loginPage {
+
+    position: relative;
+    width: 1440px;
+    height: 1024px;
+    overflow: scroll;
+    
+    background: #FFFFFF;
+    
+    }
+    
+    
+    .loginText {
+    
+    font-family: 'DM Serif Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 55px;
+    
+    color: #000000;
+    }
+    
+    
+    .logo {
+    
+    position: absolute;
+    left: 13.12%;
+    right: 76.94%;
+    top: 16.31%;
+    bottom: 79.2%;
+    
+    width: 250px;
+    height: 50px;
+    }
+    
+    
+    .login_img {
+    
+    position: absolute;
+    width: 469px;
+    height: 599px;
+    left: 189px;
+    top: 223px;
+    }
+    
+    .loginDiv {
+      position: absolute;
+      width: 450px;
+      height: 595px;
+      left: 738px;
+      right: 252px;
+      top:  213px;
+      bottom: 216px;
+    }
+    
+    .detailsText {
+      color: grey;
+    }
+    
+    #signUpLink {
+      position: absolute;
+      top: 574px;
+      left: 370px;
+      color: #676767;
+      font-family: Roboto;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 700;
+      line-height: normal;
+      text-decoration-line: underline;
+    }
+    
+    #accountQuestion {
+      position: absolute;
+      right: 273px;
+      top: 574px;
+      color: #676767;
+      font-family: Roboto;
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 300;
+      line-height: normal;
+    }
+    
+    #formButton {
+      display: flex;
+      width: 450px;
+      height: 60px;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    
+     
+    
+      color: #FFF;
+      font-family: Roboto;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    
+    .formFields {
+      bottom: 70px;
+    }
