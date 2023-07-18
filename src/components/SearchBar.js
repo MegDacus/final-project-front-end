@@ -18,7 +18,7 @@ function SearchBar() {
             <InputGroup>
                 <Form.Control
                     onChange={handleInputChange}
-                    placeholder="Search..."/>
+                    placeholder="Search by club name, book title, or genre"/>
                 <Button onClick={handleSearch} variant="outline-secondary">
                     <GrSearch/>
                 </Button>

@@ -19,7 +19,7 @@ function Carousel() {
             {
                 "loop": true,
                 "slides": {
-                    "perView": 6,
+                    "perView": 7,
                     "spacing": 10
                 },
                 slideChanged(slider) {
