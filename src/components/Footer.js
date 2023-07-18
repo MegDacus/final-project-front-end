@@ -1,13 +1,13 @@
 import React from 'react';
 import '../styles/Home.css';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
-import { Row, Col } from "react-bootstrap"
+import { Container, Row, Col } from "react-bootstrap"
 
 
 function Footer() {
   return (
     <footer className="text-center" style={{"background-color": "#CADDFE"}}>
-        <div className="container pt-2">
+        <Container className="pt-2">
             <Row>
                 <Col>
                     <ul className="list-unstyled">
@@ -52,7 +52,7 @@ function Footer() {
                     </ul>
                 </Col>
             </Row>
-        </div>
+        </Container>
 </footer>
   );
 };
