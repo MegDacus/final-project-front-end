@@ -2,22 +2,43 @@ import {React, useState} from 'react';
 import { Container, Button, Form } from 'react-bootstrap';
 
 function LoginForm() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({
+        "username": "",
+        "password": "",
+    });
 
-    function handleEmailChange(e) {
-        setEmail(e.target.value)
-    }
-
-    function handlePasswordChange(e) {
-        setPassword(e.target.value)
+    function handleChange(e) {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log({
-            'email': email,
-            'password': password  
+
+        const loginDetails = {
+           ...formData,
+        }
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": csrfToken,
+            },
+            body: JSON.stringify(loginDetails),
+            credentials: 'include',
+        })
+        .then((r) => console.log(r))
+        .then(() => {
+            setFormData({
+                username: "",
+                password: "",
+            });
+            console.log('login complete')
         })
     }
 
@@ -29,12 +50,20 @@ function LoginForm() {
 
         <Form onSubmit={handleSubmit}>
             <Form.Group className="formFields">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control onChange={handleEmailChange} type='email' placeholder="name@example.com"/>
+                <Form.Label>Username</Form.Label>
+                <Form.Control 
+                    onChange={handleChange} 
+                    type='name'
+                    name='username' 
+                    value={formData.username}/>
             </Form.Group>
             <Form.Group className="formFields">
                 <Form.Label>Password</Form.Label>
-                <Form.Control  onChange={handlePasswordChange} type="password"/>
+                <Form.Control  
+                    onChange={handleChange} 
+                    type="password"
+                    name="password"
+                    value={formData.password}/>
             <Form.Text muted>
                 Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces.
             </Form.Text>

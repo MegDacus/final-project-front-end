@@ -1,6 +1,5 @@
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
-import '../styles/Home.css';
 import "keen-slider/keen-slider.min.css"
 import HappyPlace from '../images/books/HappyPlace.jpeg';
 import FourthWing from '../images/books/FourthWing.jpeg';

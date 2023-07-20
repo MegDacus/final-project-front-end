@@ -1,13 +1,26 @@
 import React from 'react';
 import login_vector from '../images/login_vector.jpg'
-import '../App.css'
-import { Row, Col, Container, Image } from 'react-bootstrap';
+import { Row, Col, Container, Image, Button } from 'react-bootstrap';
 import logo from '../images/black-logo.png'
 import '../styles/Login.css'
 import LoginForm from '../components/LoginForm';
 
 function Login() {
 
+    function handleLogout() {
+        fetch('http://localhost:3000/logout', {
+            method: 'delete', 
+            header: {
+                'content-type': 'application/json'
+            }
+        })
+        .then((r) => console.log(r))
+    }
+
+    function handleMeRequest() {
+        fetch('http://localhost:3000/me')
+        .then((r) => console.log(r))
+    }
 
 
 return (
@@ -28,6 +41,8 @@ return (
                 </Col>
                 <Col>
                     <LoginForm/>
+                    <Button onClick={handleLogout}>Logout</Button>
+                    <Button onClick={handleMeRequest}>ME</Button>
                 </Col>
             </Row>
         </Container>

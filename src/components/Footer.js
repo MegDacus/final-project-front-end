@@ -1,12 +1,11 @@
 import React from 'react';
-import '../styles/Home.css';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import { Container, Row, Col } from "react-bootstrap"
 
 
 function Footer() {
   return (
-    <footer className="text-center" style={{"background-color": "#CADDFE"}}>
+    <footer className="footer text-center fixed-bottom">
         <Container className="pt-2">
             <Row>
                 <Col>
@@ -15,7 +14,7 @@ function Footer() {
                             <a href="#" className="text-dark">Join a Club</a>
                         </li>
                         <li>
-                            <a href="#" className="text-dark">Start a Club</a>
+                            <a href="/new-club" className="text-dark">Start a Club</a>
                         </li>
                     </ul> 
                 </Col>
