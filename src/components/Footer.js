@@ -11,7 +11,7 @@ function Footer() {
                 <Col>
                     <ul className="list-unstyled">
                         <li>
-                            <a href="#" className="text-dark">Join a Club</a>
+                            <a href="/clubs" className="text-dark">Join a Club</a>
                         </li>
                         <li>
                             <a href="/new-club" className="text-dark">Start a Club</a>

@@ -3,9 +3,14 @@ import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import LogoIcon from '../images/logo-icon.png';
 
 function NavbarMain() {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState("");
 
     useEffect(() => {
+        getUserInfo()
+    }, [])
+       
+
+    const getUserInfo = () => {
         fetch('http://localhost:3000/me')
         .then((r) => {
            if (r.ok) {
@@ -16,11 +21,12 @@ function NavbarMain() {
                     "last_name": data.last_name
                 })
             })
-            }
-            else {
-                setUser(null)
-            }
-        })}, [])
+            
+            .catch((error) => {
+                console.error('Error fetching user data', error)
+            })  
+        }});    
+    }
 
    const handleLogout = () => {
 
@@ -31,6 +37,9 @@ function NavbarMain() {
         }
     })
     .then((r) => console.log(r))
+    .then(() => {
+        setUser("")
+    })
     };
 
     const loggedInNav = () => {
@@ -62,7 +71,7 @@ function NavbarMain() {
                     <Nav.Link href="library">Library</Nav.Link>
                     <Nav.Link href="clubs">Clubs</Nav.Link>
             </Nav>
-            <Nav className="mr-auto">
+            <Nav style={{"position": "absolute", "right": 10}}>
                 { !user ? loggedOutNav() : loggedInNav() }
             </Nav>
             </Navbar.Collapse>

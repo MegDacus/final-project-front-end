@@ -9,6 +9,9 @@ import Library from "./pages/Library";
 import Login from "./pages/Login";
 import NavbarMain from "./components/NavbarMain";
 import Clubs from "./pages/Clubs";
+import NewClub from './pages/NewClub';
+import Protected from './components/Protected';
+import Signup from './pages/Signup';
 import './App.css';
 
 function App() {
@@ -23,6 +26,10 @@ function App() {
             <Route path="/clubs" element={<Clubs/>}></Route>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/clubs" element={<Clubs/>}></Route>
+            <Route path="/signup" element={<Signup/>}></Route>
+            <Route path="/new-club" 
+              element={<Protected ProtectedComponent={<NewClub/>}/>}>
+            </Route>
           </Routes>
         </Router>
     </React.StrictMode>

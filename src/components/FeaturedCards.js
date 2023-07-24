@@ -15,7 +15,7 @@ function FeaturedCards() {
                             <Card.Body>
                                 <Card.Title>Club Name</Card.Title>
                                 <Card.Text>Club Description</Card.Text>
-                                <Button>Join club here</Button>
+                                <Button>View club here</Button>
                             </Card.Body>
                         </Card>
                         <Card className="m-1 p-3" variant="light" border="light" style={{ width: 'calc(33.33% - 2rem)' }}>
@@ -23,7 +23,7 @@ function FeaturedCards() {
                             <Card.Body>
                                 <Card.Title>Club Name</Card.Title>
                                 <Card.Text>Club Description</Card.Text>
-                                <Button>Join club here</Button>
+                                <Button>View club here</Button>
                             </Card.Body>
                         </Card>
                         <Card className="m-1 p-3" variant="light" border="light" style={{ width: 'calc(33.33% - 2rem)' }}>
@@ -31,7 +31,7 @@ function FeaturedCards() {
                             <Card.Body>
                                 <Card.Title>Club Name</Card.Title>
                                 <Card.Text>Club Description</Card.Text>
-                                <Button>Join club here</Button>
+                                <Button>View club here</Button>
                             </Card.Body>
                         </Card>
                     </Row>
