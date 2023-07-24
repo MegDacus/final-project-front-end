@@ -6,7 +6,7 @@ import { Container, Row, Col } from "react-bootstrap"
 
 function Footer() {
   return (
-    <footer className="text-center" style={{"background-color": "#CADDFE"}}>
+    <footer className="footer text-center">
         <Container className="pt-2">
             <Row>
                 <Col>

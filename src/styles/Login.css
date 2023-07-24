@@ -1,70 +1,65 @@
     
     .loginText {
     
-    font-family: 'DM Serif Display';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 55px;
-    
-    color: #000000;
-    }
-    
-    
-    .logo {
-    width: 250px;
-    height: 50px;
-    }
-    
-    
-    .login_img {
-    width: 469px;
-    }
-    
-    .loginDiv {
-      width: 469px;
-    }
-    
-    .detailsText {
-      color: grey;
-    }
-    
-    #signUpLink {
-      color: #676767;
-      font-family: Roboto;
-      font-size: 18px;
-      font-style: italic;
-      font-weight: 700;
-      line-height: normal;
-      text-decoration-line: underline;
-    }
-    
-    #accountQuestion {
-      color: #676767;
-      font-family: Roboto;
-      font-size: 18px;
-      font-style: italic;
-      font-weight: 300;
-      line-height: normal;
-    }
-    
-    #formButton {
-      display: flex;
-      width: 200px;
-      height: 60px;
-      padding: 10px;
-      justify-content: center;
-      align-items: center;
-    
-      color: #FFF;
-      font-family: Roboto;
-      font-size: 20px;
+      font-family: 'DM Serif Display';
       font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-    }
-    
-    .formFields {
-      width: 300px;
-      bottom: 70px;
-    }
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 55px;
+      
+      color: #000000;
+      }
+      
+  
+      .login_img {
+      width: 430px;
+      }
+     
+      .detailsText {
+        color: grey;
+      }
+      
+      #signUpLink {
+        color: #676767;
+        font-family: Roboto;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 700;
+        line-height: normal;
+        text-decoration-line: underline;
+      }
+      
+      #accountQuestion {
+        color: #676767;
+        font-family: Roboto;
+        font-size: 18px;
+        font-style: italic;
+        font-weight: 300;
+        line-height: normal;
+      }
+      
+      #formButton {
+        display: flex;
+        width: 200px;
+        height: 60px;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+      
+        color: #FFF;
+        font-family: Roboto;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+      
+      .formFields {
+        width: 300px;
+        bottom: 70px;
+      }
+  
+      .max-width-container {
+        padding: 0;
+      }
+      

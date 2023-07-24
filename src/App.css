@@ -1,5 +1,18 @@
-@import url("bootstrap/dist/css/bootstrap.min.css");
 
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding-bottom: 70px;
+}
+
+#root {
+  flex: 1;
+}
 
 .navbar {
   background: #CADDFE;
@@ -12,4 +25,14 @@
 
 .book-carousel {
   background-color: #FE8A868C;
+}
+
+.btn {
+  text-transform: none;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  background-color: #CADDFE;
 }

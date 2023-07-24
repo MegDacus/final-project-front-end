@@ -11,7 +11,7 @@ import StationEleven from '../images/books/StationEleven.jpeg';
 import SongofAchilles from '../images/books/SongofAchilles.jpeg';
 import TheSecretHistory from '../images/books/TheSecretHistory.jpeg';
 import Image from 'react-bootstrap/Image'
-import {useState} from 'react';
+import { React, useState} from 'react';
 
 function Carousel() {
     const [currentSlide, setCurrentSlide] = useState(0)
@@ -40,8 +40,8 @@ function Carousel() {
             <div className="d-flex slider keen-slider__slide"><Image className="books" src={JadeCity} alt="book cover"/></div>
             <div className="d-flex slider keen-slider__slide"><Image className="books" src={Tomorrow} alt="book cover"/></div>
             <div className="slider d-flex keen-slider__slide"><Image className="books" src={TheSecretHistory} alt="book cover"/></div>
-            <i onClick={(e) => e.stopPropagation() || instanceRef.current?.prev()} className="bi arrow arrow--left bi-caret-left-fill" style={{color: "#FFFFFF"}}></i>
-            <i onClick={(e) => e.stopPropagation() || instanceRef.current?.next()} className="bi arrow arrow--right bi-caret-right-fill" style={{color: "#FFFFFF"}}></i>
+            <i onClick={(e) => e.stopPropagation() || instanceRef.current?.prev()} className="bi arrow arrow--left bi-caret-left-fill"></i>
+            <i onClick={(e) => e.stopPropagation() || instanceRef.current?.next()} className="bi arrow arrow--right bi-caret-right-fill"></i>
         </div>
         </div>
     )

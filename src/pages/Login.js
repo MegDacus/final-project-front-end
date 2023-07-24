@@ -1,36 +1,18 @@
 import React from 'react';
 import login_vector from '../images/login_vector.jpg'
-import '../App.css'
-import { Row, Col, Container, Image } from 'react-bootstrap';
-import logo from '../images/black-logo.png'
+import { Row, Col, Container, Image, Button } from 'react-bootstrap';
 import '../styles/Login.css'
 import LoginForm from '../components/LoginForm';
 
 function Login() {
 
 
-
 return (
-    <Container className="loginPage">
-        <Container className="m-5">
-            <Row>
-                <a href="/">
-                <Image src={logo} className="logo" alt="logo"/>
-                </a>
-            </Row>
-        </Container>
-        <Container className="col-12">
-            <Row>
-                <Col>
-                    <Container className="pl-1 col-6">
-                        <Image className='login_img' src={login_vector} alt="people reading books"/>
-                    </Container>
-                </Col>
-                <Col>
-                    <LoginForm/>
-                </Col>
-            </Row>
-        </Container>
+    <Container className="d-flex align-items-center justify-content-center m-5">
+        <div className="max-width-container ml-">
+            <Image className='login_img' src={login_vector} alt="people reading books"/>
+        </div>
+        <LoginForm/>
     </Container>
 )
 

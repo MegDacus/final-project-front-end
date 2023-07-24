@@ -1,28 +1,28 @@
-import React from 'react';
-import { Container } from 'react-bootstrap';
-import NavigationBar from '../components/NavigationBar';
+import {React} from 'react';
+import { Container, Button } from 'react-bootstrap';
 import BannerImage from '../images/home-banner.jpg'
 import logo from "../images/logo-no-background.png"
 import Carousel from "../components/Carousel"
 import '../styles/Home.css'
-import ClubCards from '../components/ClubCards'
+import FeaturedCards from '../components/FeaturedCards'
 import Footer from '../components/Footer'
 
 function Home() {
+
     return (
         <>
-            <NavigationBar/>
             <Container id="home-banner" className= "d-flex p-5 align-items-center">
                 <Container>
                     <img src={BannerImage} alt="people reading" className="home-img mr-auto"/>
                 </Container>
-                <Container className= "ml-auto">
+                <Container className= "ml-auto text-center">
                     <img src={logo} width="300px" height="50px" alt="logo" className="mx-auto d-block"/>
                     <br/>
-                    <p className="ml-5 mr-5 text-center">Welcome to Curiouser, a captivating destination for book lovers and avid readers! Immerse yourself in thought-provoking discussions, discover new perspectives, and forge connections with fellow bibliophiles who share your passion for the written word. </p>
+                    <p className="ml-5 mr-5">Welcome to Curiouser, a captivating destination for book lovers and avid readers! Immerse yourself in thought-provoking discussions, discover new perspectives, and forge connections with fellow bibliophiles who share your passion for the written word. </p>
+                    <Button href="/new-club" variant="outline-secondary" size="sm">Start your own club</Button>
                 </Container>
             </Container>
-            <ClubCards/>
+            <FeaturedCards/>
             <div className="p-5 popular-books">
                 <h3 className="text-center">Popular Books</h3>
                 <Carousel/>
