@@ -12,12 +12,15 @@ import Clubs from "./pages/Clubs";
 import NewClub from './pages/NewClub';
 import Protected from './components/Protected';
 import Signup from './pages/Signup';
+import { UserProvider } from './components/UserContext';
 import './App.css';
 
 function App() {
+  
   return (
     <React.StrictMode>
       <Router>
+        <UserProvider>
         <NavbarMain/>
           <Routes>
             <Route exact path="/" element={<Home/>}></Route>
@@ -31,6 +34,7 @@ function App() {
               element={<Protected ProtectedComponent={<NewClub/>}/>}>
             </Route>
           </Routes>
+          </UserProvider>
         </Router>
     </React.StrictMode>
 )};

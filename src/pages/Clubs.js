@@ -2,6 +2,7 @@ import { useState, useEffect, React } from 'react';
 import { Row, Container} from 'react-bootstrap';
 import Footer from '../components/Footer';
 import ClubCarousel from '../components/ClubCarousel';
+import NavbarMain from '../components/NavbarMain';
 
 function Clubs() {
     const [newBookclubs, setNewBookclubs ] = useState([])
@@ -32,7 +33,6 @@ function Clubs() {
 
     return(
         <>
-         
             <Container>
                 <Container>
                     <h3 className="text-center mt-5 m-3">Newest Clubs</h3>  

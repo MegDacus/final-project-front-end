@@ -1,35 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import LogoIcon from '../images/logo-icon.png';
+import UserContext from '../components/UserContext';
+import { useNavigate } from 'react-router-dom'
 
 function NavbarMain() {
-    const [user, setUser] = useState("");
-
-    useEffect(() => {
-        getUserInfo()
-    }, [])
-       
-
-    const getUserInfo = () => {
-        fetch('http://localhost:3000/me')
-        .then((r) => {
-           if (r.ok) {
-            r.json().then((data) => {
-                setUser({
-                    "username": data.username,
-                    "first_name": data.first_name,
-                    "last_name": data.last_name
-                })
-            })
-            
-            .catch((error) => {
-                console.error('Error fetching user data', error)
-            })  
-        }});    
-    }
-
-   const handleLogout = () => {
-
+   const { user, setUser } = useContext(UserContext); 
+   const navigate = useNavigate();
+   
+   const handleLogout = () => { 
     fetch('http://localhost:3000/logout', {
         method: 'delete', 
         header: {
@@ -38,7 +17,8 @@ function NavbarMain() {
     })
     .then((r) => console.log(r))
     .then(() => {
-        setUser("")
+        setUser(null)
+        navigate("/")
     })
     };
 

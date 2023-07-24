@@ -1,6 +1,7 @@
-import { React, useState } from "react";
+import { React, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert, Container, Button, Form } from "react-bootstrap";
+import UserContext from '../components/UserContext';
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function LoginForm() {
   });
   const navigate = useNavigate();
   const [errors, setErrors] = useState();
+  const { setUser } = useContext(UserContext);
 
   function handleChange(e) {
     setFormData({
@@ -33,9 +35,16 @@ function LoginForm() {
     })
       .then((r) => {
         if (r.ok) {
-          r.json().then(console.log);
-          navigate("/")
-          }  else {
+            r.json().then((data) => {
+            setUser({
+                "id": data.id, 
+                "username": data.username,
+                "first_name": data.first_name,
+                "last_name": data.last_name,
+                "memberships": data.memberships
+            })
+            navigate("/") })
+        } else {
             r.json().then((e) => setErrors(Object.values(e).toString()))
          }})
       

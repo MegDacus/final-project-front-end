@@ -1,5 +1,6 @@
 import {React, useEffect, useState} from 'react';
 import { Container, Card, Row } from 'react-bootstrap';
+import NavbarMain from '../components/NavbarMain';
 
 function Library() {
     const [books, setBooks] = useState([]);

@@ -1,11 +1,13 @@
-import {React, useState} from 'react';
+import {React, useContext, useState} from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
+import UserContext from '../components/UserContext';
 
 function NewClub() {
+    const {user} = useContext(UserContext);
     const [formDetails, setFormDetails] = useState({
         "name": "",
         "description": "",
-        "host_user_id": 1
+        "host_user_id": user.id
     })
 
     function handleChange(e) {
@@ -44,7 +46,7 @@ function NewClub() {
 
 
     return(
-        <>
+        <>  
             <Container style={{width: 500}}>
                 <h3 className="text-center m-5">Create A Club</h3>
                 <Form onSubmit={handleSubmit}>

@@ -6,11 +6,12 @@ import Carousel from "../components/Carousel"
 import '../styles/Home.css'
 import FeaturedCards from '../components/FeaturedCards'
 import Footer from '../components/Footer'
+import NavbarMain from '../components/NavbarMain';
 
 function Home() {
 
     return (
-        <>
+        <>  
             <Container id="home-banner" className= "d-flex p-5 align-items-center">
                 <Container>
                     <img src={BannerImage} alt="people reading" className="home-img mr-auto"/>
