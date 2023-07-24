@@ -14,29 +14,13 @@ function LoginForm() {
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    const loginDetails = {
-      ...formData,
-    };
-
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loginDetails),
-    })
-      .then((r) => {
-        if (r.ok) {
-          r.json().then(console.log);
-          navigate("/")
-          }  else {
-            r.json().then((e) => setErrors(Object.values(e).toString()))
-         }})
-      
-  }
+    function handleSubmit(e) {
+        e.preventDefault()
+        console.log({
+            'email': email,
+            'password': password  
+        })
+    }
 
   return (
     <div className="loginDiv m-5">
@@ -44,46 +28,27 @@ function LoginForm() {
       <p className="detailsText"> Welcome Back. </p>
       <p className="detailsText"> Please Enter Your Details.</p>
 
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="formFields">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            onChange={handleChange}
-            type="name"
-            name="username"
-            value={formData.username}
-          />
-        </Form.Group>
-        <Form.Group className="formFields">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            onChange={handleChange}
-            type="password"
-            name="password"
-            value={formData.password}
-          />
-          <Form.Text muted>
-            Your password must be 8-20 characters long, contain letters and
-            numbers, and must not contain spaces.
-          </Form.Text>
-        </Form.Group>
-        <br />
-        <Button id="formButton" type="submit">
-          Login
-        </Button>
-      </Form>
-      <Container className="d-flex mt-5 col-12">
-        <div className="col-9"><p id="accountQuestion">
-          Don't have an account?
-        </p></div>
-        <div className="col-3"><a id="signUpLink" href="#Home">
-          Sign Up
-        </a>
-        </div>
-      </Container>
-      { errors ? <Alert variant="danger">{errors}</Alert> : null }
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className="formFields">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control onChange={handleEmailChange} type='email' placeholder="name@example.com"/>
+            </Form.Group>
+            <Form.Group className="formFields">
+                <Form.Label>Password</Form.Label>
+                <Form.Control  onChange={handlePasswordChange} type="password"/>
+            <Form.Text muted>
+                Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces.
+            </Form.Text>
+            </Form.Group>
+            <br/>
+            <Button id="formButton" type="submit">Login</Button>
+        </Form>
+        <Container className="d-flex mt-5 col-12">
+            <p className="col-6" id="accountQuestion">Don't have an account?</p>
+            <a className="col-6" id='signUpLink' href='#Home'>Sign Up</a>
+        </Container>
     </div>
-  );
+    )
 }
 
 export default LoginForm;
