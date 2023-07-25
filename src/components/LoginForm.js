@@ -88,7 +88,7 @@ function LoginForm() {
         <div className="col-9"><p id="accountQuestion">
             Don't have an account?
         </p></div>
-        <div className="col-3"><a id="signUpLink" href="#Home">
+        <div className="col-3"><a id="signUpLink" href="/signup">
             Sign Up
         </a>
         </div>

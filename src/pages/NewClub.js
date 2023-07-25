@@ -3,11 +3,11 @@ import { Form, Button, Container } from 'react-bootstrap';
 import UserContext from '../components/UserContext';
 
 function NewClub() {
-    const {user} = useContext(UserContext);
+    const user = useContext(UserContext);
     const [formDetails, setFormDetails] = useState({
         "name": "",
         "description": "",
-        "host_user_id": user.id
+        "host_user_id": user.user.id
     })
 
     function handleChange(e) {

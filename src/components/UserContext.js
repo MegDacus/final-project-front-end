@@ -16,7 +16,9 @@ export function UserProvider({children}) {
           "username": data.username,
           "first_name": data.first_name,
           "last_name": data.last_name,
-          "memberships": data.memberships
+          "memberships": data.memberships,
+          "is_admin": data.is_admin,
+          "bookclubs": data.bookclubs
         })
       })} else {
         setUser(null);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './index.css';
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -13,7 +13,8 @@ import NewClub from './pages/NewClub';
 import Protected from './components/Protected';
 import Signup from './pages/Signup';
 import { UserProvider } from './components/UserContext';
-import './App.css';
+import AdminHome from './pages/AdminHome';
+import UserProfile from './pages/UserProfile';
 
 function App() {
   
@@ -31,8 +32,10 @@ function App() {
             <Route path="/clubs" element={<Clubs/>}></Route>
             <Route path="/signup" element={<Signup/>}></Route>
             <Route path="/new-club" 
-              element={<Protected ProtectedComponent={<NewClub/>}/>}>
+              element={<Protected ProtectedComponent={<NewClub/>} adminAccess={false}/>}>
             </Route>
+            <Route path="/admin-home" element={<Protected ProtectedComponent={<AdminHome/>} adminAccess={true}/>}></Route>
+          <Route path="/profile" element={<Protected ProtectedComponent={<UserProfile/>} adminAccess={false}/>}/>
           </Routes>
           </UserProvider>
         </Router>

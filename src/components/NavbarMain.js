@@ -23,13 +23,13 @@ function NavbarMain() {
     };
 
     const loggedInNav = () => {
-        return(
+            return(
             <NavDropdown title={`Hello, ${user.first_name}`} id="basic-nav-dropdown">
-            <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-            <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                { user.is_admin ? <NavDropdown.Item href="/admin-home">Admin Dashboard</NavDropdown.Item> : null}
             </NavDropdown>
-        )
-    }
+            )}
 
     const loggedOutNav = () => {
         return(

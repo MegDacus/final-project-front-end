@@ -1,6 +1,6 @@
 import {React, useEffect, useState} from 'react';
 import { Container, Card, Row } from 'react-bootstrap';
-import NavbarMain from '../components/NavbarMain';
+import Footer from '../components/Footer';
 
 function Library() {
     const [books, setBooks] = useState([]);
@@ -18,7 +18,7 @@ function Library() {
     
     return(
         <>
-            <Container className="mt-5 text-center">
+            <Container className="mt-5 text-center container-height">
                 <h3>All Books</h3>
                 <Container>
                     <Row className="justify-content-center">
@@ -30,6 +30,7 @@ function Library() {
                     </Row>
                 </Container>
             </Container>
+            <Footer/>
         </>
     )
 }

@@ -2,7 +2,6 @@ import { React, useState } from 'react';
 import banner from '../images/search-banner.jpg';
 import { Container, Image } from 'react-bootstrap';
 import SearchBar from '../components/SearchBar';
-import NavbarMain from '../components/NavbarMain';
 
 function Search() {
 
