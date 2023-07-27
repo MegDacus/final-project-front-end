@@ -10,7 +10,6 @@ function Clubs() {
 
     useEffect(() => {
         getClubs();
-        // getFantasyClubs();
     }, []);
 
     const getClubs = () => {

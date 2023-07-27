@@ -15,7 +15,8 @@ import Signup from './pages/Signup';
 import { UserProvider } from './components/UserContext';
 import AdminHome from './pages/AdminHome';
 import UserProfile from './pages/UserProfile';
-import BookPage from './pages/BookPage';
+import Book from './pages/Book';
+import Club from './pages/Club';
 
 function App() {
   
@@ -28,8 +29,9 @@ function App() {
             <Route exact path="/" element={<Home/>}></Route>
             <Route path="/search" element={<Search/>}></Route>
             <Route exact path="/library" element={<Library/>}></Route>
-            <Route exact path="/:id" element={<BookPage/>}></Route>
-            <Route path="/clubs" element={<Clubs/>}></Route>
+            <Route exact path="/:id" element={<Book/>}></Route>
+            <Route exact path="/clubs" element={<Clubs/>}/>
+            <Route exact path="/bookclub/:id" element={<Club/>}/>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/clubs" element={<Clubs/>}></Route>
             <Route path="/signup" element={<Signup/>}></Route>

@@ -2,7 +2,7 @@ import {React, useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {Container, Button, Card, Col, Image} from 'react-bootstrap';
 
-function BookPage() {
+function Book() {
     const {id} = useParams();
     const [book, setBook] = useState('');
 
@@ -18,7 +18,7 @@ function BookPage() {
 
 
     return(
-        <Container fluid className="d-flex mt-5 align-items-">
+        <Container fluid className="d-flex mt-5 align-items-center">
             <Col md="true">
                 <Container>
                     <h2>{book.title}</h2>
@@ -48,4 +48,4 @@ function BookPage() {
             </Col>
        </Container>
     )}
-export default BookPage;
+export default Book;

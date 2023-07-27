@@ -33,6 +33,7 @@ function ClubCarousel({clubs}) {
                             <small>{bookclub.description}</small>
                         </Card.Text>
                     </Card.Body>
+                        <Card.Link href={'/bookclub/'+bookclub.id} >View Club</Card.Link>
                 </Card>
             ))}
             <i onClick={(e) => e.stopPropagation() || instanceRef?.current?.prev()} className="bi arrow arrow--left bi-caret-left-fill" style={{color: "#FFFFFF"}}></i>
