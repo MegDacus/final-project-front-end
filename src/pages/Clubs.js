@@ -52,7 +52,6 @@ function Clubs() {
                     </Row> */}
                 </Container>
             </Container>
-            <Footer style={{bottom: 0}}/>
         </>
     )
 }

@@ -7,7 +7,7 @@ function NewClub() {
     const [formDetails, setFormDetails] = useState({
         "name": "",
         "description": "",
-        "host_user_id": user.user.id
+        "host_user_id": user.id,
     })
 
     function handleChange(e) {

@@ -7,11 +7,14 @@ function Search() {
 
     return (
         <>
-            <Container className="text-center">
+            <Container className="text-center container-height ">
                 <Container className= "p-5">
                     <Image className="mr-auto" src={banner} style={{width: 600}}/>
                 </Container>
              <SearchBar/>
+             <Container className="mt-5">
+                <h3>Search Results...</h3>
+             </Container>
             </Container>
         </>
     )

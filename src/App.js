@@ -17,6 +17,7 @@ import AdminHome from './pages/AdminHome';
 import UserProfile from './pages/UserProfile';
 import Book from './pages/Book';
 import Club from './pages/Club';
+import Footer from './components/Footer';
 
 function App() {
   
@@ -28,10 +29,10 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home/>}></Route>
             <Route path="/search" element={<Search/>}></Route>
-            <Route exact path="/library" element={<Library/>}></Route>
-            <Route exact path="/:id" element={<Book/>}></Route>
+            <Route exact path="/library" element={<Library/>}/>
+            <Route exact path="/books/:id" element={<Book/>}/>
             <Route exact path="/clubs" element={<Clubs/>}/>
-            <Route exact path="/bookclub/:id" element={<Club/>}/>
+            <Route exact path="/clubs/:id" element={<Club/>}/>
             <Route path="/login" element={<Login/>}></Route>
             <Route path="/clubs" element={<Clubs/>}></Route>
             <Route path="/signup" element={<Signup/>}></Route>

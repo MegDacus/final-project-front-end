@@ -47,9 +47,9 @@ function NavbarMain() {
                     <Navbar.Brand href="/"><img src={LogoIcon} alt="logo" width="40" height="40"/>
                     </Navbar.Brand>
                 </Container>
-                    <Nav.Link href="search">Search</Nav.Link>
-                    <Nav.Link href="library">Library</Nav.Link>
-                    <Nav.Link href="clubs">Clubs</Nav.Link>
+                    <Nav.Link href="/search">Search</Nav.Link>
+                    <Nav.Link href="/library">Library</Nav.Link>
+                    <Nav.Link href="/clubs">Clubs</Nav.Link>
             </Nav>
             <Nav style={{"position": "absolute", "right": 10}}>
                 { !user ? loggedOutNav() : loggedInNav() }

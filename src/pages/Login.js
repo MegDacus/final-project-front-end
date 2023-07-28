@@ -3,6 +3,7 @@ import login_vector from '../images/login_vector.jpg'
 import {Container, Col, Row, Image} from 'react-bootstrap';
 import '../styles/Login.css'
 import LoginForm from '../components/LoginForm';
+import Footer from '../components/Footer';
 
 function Login() {
 
@@ -15,7 +16,6 @@ return (
         </div>
         <LoginForm/>
     </Container>
-        <a href="#" style={{position: "absolute", left: 10, bottom: 10}}>Admin Login</a>
     </>
 )
 

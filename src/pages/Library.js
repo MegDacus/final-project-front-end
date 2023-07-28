@@ -25,13 +25,12 @@ function Library() {
                     {books.map((book) => (
                         <Card key={book.id} className="text-white" variant="light" border="light" style={{width: 150}}>
                                 <Card.Img variant="top" src={book.image_url} thumbnail="true"/>
-                                <Card.Link href={'/'+book.id}>View</Card.Link>
+                                <Card.Link href={'books/'+book.id}>View</Card.Link>
                         </Card>
                     ))}
                     </Row>
                 </Container>
             </Container>
-            <Footer/>
         </>
     )
 }

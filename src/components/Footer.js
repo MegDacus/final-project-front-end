@@ -5,8 +5,8 @@ import { Container, Row, Col } from "react-bootstrap"
 
 function Footer() {
   return (
-    <footer className="footer text-center">
-        <Container className="pt-2">
+    <footer style={{bottom: 0}} className="d-flex footer text-center">
+        <Container style={{bottom: 0, position: "sticky" }} className="pt-2">
             <Row>
                 <Col>
                     <ul className="list-unstyled">
