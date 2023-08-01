@@ -31,7 +31,7 @@ function ClubCarousel({clubs}) {
         <Container ref={sliderRef} className="keen-slider">
             {clubs && clubs.map((bookclub) => (
                 <Card key={bookclub.id} className="keen-slider__slide" variant="light" border="light" style={{width: 200}}>
-                    <Card.Img variant="top" src={Cover}/>
+                    <Card.Img variant="top" src={bookclub.image_url}/>
                     <Card.Body>
                         <Card.Title>{bookclub.name}</Card.Title>
                         <Card.Text>

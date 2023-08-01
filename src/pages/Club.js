@@ -1,7 +1,6 @@
 import { React, useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Col, Button, Card, Image } from "react-bootstrap";
-import Placeholder from "../images/new-placeholder.png";
+import { Container, Col, Button, Card, Image, Spinner } from "react-bootstrap";
 import Banner from "../images/book-banner.jpg";
 import UserContext from "../components/UserContext";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -70,6 +69,7 @@ function Club() {
 
   function handleEditClick() {
     setEditView(!editView);
+    console.log(club)
   }
 
   function handleEditSubmit(formData) {}
@@ -87,9 +87,17 @@ function Club() {
     setShowEditModal(false);
   }
 
+  const genres = [
+    ...(club.this_months_book?.genres.split(", ") || []), 
+    ...(club.previous_books?.genres?.split(", ") || [])
+    ]
+
+    const uniqGenres = [...new Set(genres.map((genre) => genre))];
+
   return (
     <>
-      <Image style={{ width: "100%" }} src={Banner} />
+    {user ? <>
+      <Image style={{ width: "100%", height: 250, "objectFit": 'cover' }} src={club.image_url} />
       <Container className="d-flex mt-5">
         <Col md={5} lg={5}>
           <Container>
@@ -112,6 +120,7 @@ function Club() {
               <h3>Club Info</h3>
               <p>{club.description}</p>
               <h3>Genres</h3>
+              { uniqGenres.map((genre) => (<li key={genre}> {genre}</li>))}
               {club.memberships ? (
                 <Container>
                   <h3>Current Club Members:</h3>
@@ -151,7 +160,7 @@ function Club() {
                 ></i>
               </Container>
 
-              {user && user.username === club.host ? (
+              {user && user.id === club.host.id ? (
                 <Button
                   onClick={handleEditClick}
                   className="m-2"
@@ -205,9 +214,10 @@ function Club() {
         </Col>
       </Container>
 
-      <EditBookclubModal show={showEditModal} handleClose={handleClose} />
+      <EditBookclubModal id={id} show={showEditModal} handleClose={handleClose} />
 
       <AddMonthlyBookForm show={showBookModal} handleClose={handleClose} />
+    </> : <Spinner animation="border" variant="info"/>}
     </>
   );
 }

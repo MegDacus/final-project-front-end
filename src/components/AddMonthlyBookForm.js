@@ -80,7 +80,8 @@ function AddMonthlyBookForm({show, handleClose}) {
     };
    
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         fetch('http://localhost:3000/bookclubs/'+id+'/bookclub_books', {
             method: 'post',
             headers: {
@@ -110,7 +111,6 @@ function AddMonthlyBookForm({show, handleClose}) {
                     <InputGroup>
                         <Form.Control
                         placeholder="Search Books"
-                        aria-label="Recipient's username with two button addons"
                         value={searchQuery}
                         onChange={handleChange}
                         />

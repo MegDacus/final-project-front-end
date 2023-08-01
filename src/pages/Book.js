@@ -7,15 +7,19 @@ function Book() {
     const [book, setBook] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:3000/books/'+ id)
-        .then((response) => {
-            response.json().then((data) => {
-                console.log(data)
-                setBook(data);
-            })
-        });
+        if (!book) {
+            getBook()
+        }
+    }, [book]);
 
-    }, []);
+    const getBook = async () => {
+       await fetch('http://localhost:3000/books/'+ id)
+        .then((response) => {
+            response.json().then((data) => (setBook(data)))
+        });
+    }
+
+    const genres = book.genres && book.genres.includes(', ') ? book.genres.split(', ') : [book.genres];
 
 
     return(
@@ -26,8 +30,7 @@ function Book() {
                     <Image style={{width: 200}} src={book.image_url}/>
                     <p>Written by {book.author}</p>
                     <h3>Genres</h3>
-                    {/* Add genres as a column to the books table instead of its own table */}
-                    <li>Romance</li>
+                    { genres.map((genre) => (<li>{genre}</li>))}
                     <br/>
                     <Button variant="outline-secondary">Start Club With This Book</Button>
                 </Container>
@@ -39,7 +42,7 @@ function Book() {
                 </Container>
                 <Container>
                     <h3>Bookclubs Currently Reading</h3>
-                    {book && book.bookclubs.map((club => {
+                    {book.bookclubs && book.bookclubs.map((club => {
                        return <Card key={club.id} style={{width: 200}}>
                         <Card.Title>{club.name}</Card.Title>
                         <Card.Text>{club.description}</Card.Text>
@@ -48,5 +51,6 @@ function Book() {
                 </Container>
             </Col>
        </Container>
-    )}
+    )};
+
 export default Book;

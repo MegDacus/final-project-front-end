@@ -2,26 +2,34 @@ import {React, useState} from 'react';
 import {Form, Button, Modal} from 'react-bootstrap';
 import CreatableSelect from 'react-select/creatable';
 
-function EditBookclubModal({show, handleClose}) {
+function EditBookclubModal({show, handleClose, id}) {
     const [formData, setFormData] = useState({
-        'name': '',
-        'description': ''
+        name: '', 
+        description: '', 
+        image_url: '',
     })
-
-    const genreOptions = [
-        { value: 'Fantasy', label: 'Fantasy'},
-        { value: 'Science Fiction', label: 'Science Fiction'},
-        { value: 'Romance', label: 'Romance'},
-        { value: 'Horror', label: 'Horror'},
-        { value: 'Non-Fiction', label: 'Non-Fiction'},
-        { value: 'Contemporary Lit', label: 'Contemporary Lit'},
-        { value: 'Young Adult', label: 'Young Adult'},
-        { value: 'Children\s Lit', label: 'Children\'s Lit'}
-    ]
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
-        console.log(formData)
+
+        const updatedData = Object.fromEntries(Object.entries(formData).filter(([key, value]) => value !== ''));
+
+        fetch('http://localhost:3000/bookclubs/'+id, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedData),
+        })
+        .then((resp) => {
+            if (resp.ok) {
+                resp.json()
+            }
+            else {
+                console.log(resp)
+            }
+            })
+        window.location.reload()
     }
 
     const handleChange = (e) => {
@@ -47,12 +55,8 @@ function EditBookclubModal({show, handleClose}) {
                         <Form.Control onChange={handleChange} as="textarea" rows={3} name="description" value={formData.description}/>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Add Genres</Form.Label>
-                        <CreatableSelect isMulti options={genreOptions}/>
-                    </Form.Group>
-                    <Form.Group>
                         <Form.Label>Add Cover Photo</Form.Label>
-                        <Form.Control type="file"/>
+                        <Form.Control onChange={handleChange} type="text" placeholder="Enter Image URL" name="image_url" value={formData.image_url}/>
                     </Form.Group>
                 <Button className="mt-2" type="submit">Save Changes</Button>
                 </Form>
