@@ -5,13 +5,15 @@ import placeholder from '../images/club-cover-photo.png'
 import CreatableSelect from 'react-select/creatable';
 
 function UserProfile() {
-    const {user, setUser} = useContext(UserContext);
+    const {user} = useContext(UserContext);
     const [uploadedImage, setUploadedImage] = useState(null);
     const [profilePic, setProfilePic] = useState(null);
 
     useEffect(() => {
-        getProfileImage();
-    }, []);
+        if (user){
+            getProfileImage()
+        }
+    }, [user]);
 
     const handleImageChange = (e) => {
         const file = e.target.files?.[0];
@@ -44,8 +46,8 @@ function UserProfile() {
     })
     };
 
-    const getProfileImage = async (e) => {
-       await fetch('http://localhost:3000/get_image')
+    const getProfileImage = async () => {
+        await fetch('http://localhost:3000/get_image/'+user.id)
         .then((data) => data.json())
         .then(resp => {
             const base64_string = ('data:image/png;base64,'+resp.image_data)
@@ -72,7 +74,7 @@ function UserProfile() {
         <Container className="d-flex">
             <Container style={{width: 500}} className="m-5">
                 { user && <h1>{user.first_name} {user.last_name}</h1>}
-                {profilePic && <Image className="mb-3 mt-3" src={profilePic} style={{height: 200, width: 200 }} roundedCircle/>}
+                {user && <Image className="mb-3 mt-3" src={profilePic} style={{height: 200, width: 200 }} roundedCircle/>}
                 <Form.Group>
                     <Form.Control type="file" onChange={handleImageChange}/>
                     <Button id="button-addon2" className="mt-3" onClick={saveImage}>{ profilePic ? "Change Profile Pic" : "Add Profile Pic"}</Button>
