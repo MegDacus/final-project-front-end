@@ -2,7 +2,7 @@ import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
 import {Container, Card, Button} from 'react-bootstrap';
 import { React, useState, useEffect } from 'react';
-import Cover from '../images/club-cover-photo.png'
+import Cover from '../../images/club-cover-photo.png'
 
 function ClubCarousel({clubs}) {
     const [slides, setSlides] = useState([]);

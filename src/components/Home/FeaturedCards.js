@@ -1,5 +1,5 @@
 import { Container, Card, Row, Button } from "react-bootstrap";
-import Placeholder from "../images/image-placeholder.png"
+import Placeholder from "../../images/image-placeholder.png"
 import React from 'react';
 
 function FeaturedCards() {

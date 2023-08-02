@@ -1,7 +1,7 @@
 import { React, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Alert, Container, Button, Form } from "react-bootstrap";
-import UserContext from '../components/UserContext';
+import UserContext from '../UserContext';
 
 function LoginForm() {
   const [formData, setFormData] = useState({

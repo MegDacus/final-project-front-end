@@ -1,13 +1,13 @@
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
-import HappyPlace from '../images/books/HappyPlace.jpeg';
-import FourthWing from '../images/books/FourthWing.jpeg';
-import JadeCity from '../images/books/JadeCity.jpeg';
-import Tomorrow from '../images/books/Tomorrow.jpeg';
-import TheWayofKings from '../images/books/TheWayofKings.jpeg';
-import StationEleven from '../images/books/StationEleven.jpeg';
-import SongofAchilles from '../images/books/SongofAchilles.jpeg';
-import TheSecretHistory from '../images/books/TheSecretHistory.jpeg';
+import HappyPlace from '../../images/books/HappyPlace.jpeg';
+import FourthWing from '../../images/books/FourthWing.jpeg';
+import JadeCity from '../../images/books/JadeCity.jpeg';
+import Tomorrow from '../../images/books/Tomorrow.jpeg';
+import TheWayofKings from '../../images/books/TheWayofKings.jpeg';
+import StationEleven from '../../images/books/StationEleven.jpeg';
+import SongofAchilles from '../../images/books/SongofAchilles.jpeg';
+import TheSecretHistory from '../../images/books/TheSecretHistory.jpeg';
 import Image from 'react-bootstrap/Image'
 import { React, useState} from 'react';
 

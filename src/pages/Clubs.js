@@ -1,7 +1,7 @@
 import { useState, useEffect, React } from 'react';
 import { Row, Container} from 'react-bootstrap';
 import Footer from '../components/Footer';
-import ClubCarousel from '../components/ClubCarousel';
+import ClubCarousel from '../components/Club/ClubCarousel';
 import NavbarMain from '../components/NavbarMain';
 
 function Clubs() {

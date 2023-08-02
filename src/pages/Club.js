@@ -1,21 +1,25 @@
 import { React, useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Col, Button, Card, Image, Spinner } from "react-bootstrap";
-import Banner from "../images/book-banner.jpg";
 import UserContext from "../components/UserContext";
-import { AiOutlineEdit } from "react-icons/ai";
-import AddMonthlyBookForm from "../components/AddMonthlyBookForm";
+import { AiOutlineEdit, AiOutlinePlus } from "react-icons/ai";
+import AddMonthlyBookForm from "../components/Club/AddMonthlyBookForm";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import EditBookclubModal from "../components/EditBookclubModal";
+import EditBookclubModal from "../components/Club/EditBookclubModal";
+import DiscussionQuestions from "../components/Club/DiscussionQuestions";
+import AddDiscussionQuestion from "../components/Club/AddDiscussionQuestion";
 
 function Club() {
   const { id } = useParams();
   const [club, setClub] = useState("");
   const { user } = useContext(UserContext);
+  const [members, setMembers] = useState([]);
+  const [membership, setMembership] = useState('');
   const [editView, setEditView] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showBookModal, setShowBookModal] = useState(false);
+  const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [hostPic, setHostPic] = useState("");
   const sliderOptions = {
     renderMode: "performance",
@@ -40,6 +44,7 @@ function Club() {
     if (club) {
         getHostProfilePic()
     }
+    getMembers();
   }, [club]);
 
   async function fetchClub() {
@@ -59,7 +64,7 @@ function Club() {
   }
 
   async function getHostProfilePic() {
-    await fetch("http://localhost:3000/get_image/" + club.host.id)
+    club.host && await fetch("http://localhost:3000/get_image/" + club.host.id)
       .then((resp) => resp.json())
       .then((data) => {
         const base64_string = ('data:image/png;base64,'+data.image_data)
@@ -67,12 +72,22 @@ function Club() {
       });
   }
 
+  async function getMembers() {
+    await fetch("http://localhost:3000/bookclubs/" + id + "/memberships")
+    .then((resp) => resp.json())
+    .then((data) => {
+        setMembers(data)
+        if (data.length > 0 && user) {
+            const isMember = data.some((member) => member.user_id === user.id)
+            setMembership(isMember)
+        }
+    })
+  }
+
   function handleEditClick() {
     setEditView(!editView);
     console.log(club)
   }
-
-  function handleEditSubmit(formData) {}
 
   function handleEditDetailsClick() {
     setShowEditModal(true);
@@ -85,7 +100,8 @@ function Club() {
   function handleClose() {
     setShowBookModal(false);
     setShowEditModal(false);
-  }
+    setShowQuestionModal(false)
+;  }
 
   const genres = [
     ...(club.this_months_book?.genres.split(", ") || []), 
@@ -211,11 +227,22 @@ function Club() {
               <h5>No Current Book</h5>
             )}
           </Container>
+          <Container className="d-flex justify-content-between">
+          <h4>Discussion Questions</h4>
+            {editView ? (
+                <Button
+                  onClick={() => {setShowQuestionModal(true)}}
+                  variant="outline-secondary"
+                >
+                  <AiOutlinePlus/>
+                </Button>) : null}
+          </Container>
+            { membership ? <DiscussionQuestions clubId={id} questions={club.discussion_questions}/> : null}
         </Col>
       </Container>
 
       <EditBookclubModal id={id} show={showEditModal} handleClose={handleClose} />
-
+      <AddDiscussionQuestion clubId={id} show={showQuestionModal} handleClose={handleClose}/>
       <AddMonthlyBookForm show={showBookModal} handleClose={handleClose} />
     </> : <Spinner animation="border" variant="info"/>}
     </>

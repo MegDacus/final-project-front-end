@@ -11,6 +11,7 @@ function AddMonthlyBookForm({show, handleClose}) {
     const [filteredBooks, setFilteredBooks] = useState([]);
     const [selectedBook, setSelectedBook] = useState('');
     const [selectedMonth, setSelectedMonth] = useState('');
+    const [year, setYear] = useState('');
     const {id} = useParams();
     
     const sliderOptions = {
@@ -89,7 +90,8 @@ function AddMonthlyBookForm({show, handleClose}) {
             },
             body: JSON.stringify({
                 "book_id": selectedBook.id,
-                "month": selectedMonth 
+                "month": parseInt(selectedMonth, 10),
+                "year": parseInt(year, 10)
             })
         })
         .then((r) => console.log(r))
@@ -147,21 +149,22 @@ function AddMonthlyBookForm({show, handleClose}) {
                     </InputGroup>
                     : null}
                     <Form.Group className="mt-2">
-                        <Form.Label>Select Month</Form.Label>
+                        <Form.Label>Select Month & Year</Form.Label>
                         <Form.Select onChange={handleMonthChange} value={selectedMonth}>
-                            <option value="January">January</option>
-                            <option value="February">February</option>
-                            <option value="March">March</option>
-                            <option value="April">April</option>
-                            <option value="May">May</option>
-                            <option value="June">June</option>
-                            <option value="July">July</option>
-                            <option value="August">August</option>
-                            <option value="September">September</option>
-                            <option value="October">October</option>
-                            <option value="November">November</option>
-                            <option value="December">December</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
                         </Form.Select> 
+                        <Form.Control className="mt-2" style={{width: 100}} type="text" placeholder="Enter year" onChange={(e) => setYear(e.target.value)}/>
                     </Form.Group>
                     <Button className="mt-2" onClick={handleSubmit}>Submit New Book</Button>
                 </Modal.Body>

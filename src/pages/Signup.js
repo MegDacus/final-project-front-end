@@ -2,7 +2,7 @@ import React from 'react';
 import login_vector from '../images/login_vector.jpg'
 import {Container, Col, Row, Image} from 'react-bootstrap';
 import '../styles/Login.css'
-import SignUpForm from '../components/SignUpForm';
+import SignUpForm from '../components/Login/SignUpForm';
 import Footer from '../components/Footer';
 
 

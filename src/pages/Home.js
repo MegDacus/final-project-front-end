@@ -2,11 +2,10 @@ import {React, useContext } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import BannerImage from '../images/home-banner.jpg'
 import logo from "../images/logo-no-background.png"
-import Carousel from "../components/Carousel"
+import Carousel from "../components/Home/Carousel"
 import '../styles/Home.css'
-import FeaturedCards from '../components/FeaturedCards'
+import FeaturedCards from '../components/Home/FeaturedCards'
 import Footer from '../components/Footer'
-import NavbarMain from '../components/NavbarMain';
 import UserContext from '../components/UserContext';
 
 function Home() {

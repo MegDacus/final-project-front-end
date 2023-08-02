@@ -1,7 +1,7 @@
 import {React, useState, useEffect} from 'react';
 import {Container, Button, Table} from 'react-bootstrap';
-import BookForm from '../components/BookForm';
-import AdminSignupModal from '../components/AdminSignupModal';
+import BookForm from '../components/Admin/BookForm';
+import AdminSignupModal from '../components/Admin/AdminSignupModal';
 
 function AdminHome() {
     const [showForm, setShowForm] = useState(false);
