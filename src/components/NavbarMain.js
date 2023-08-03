@@ -22,26 +22,13 @@ function NavbarMain() {
     })
     };
 
-    const loggedInNav = () => {
-            return(
-            <NavDropdown title={`Hello, ${user.first_name}`} id="basic-nav-dropdown">
-                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-                { user.is_admin ? <NavDropdown.Item href="/admin-home">Admin Dashboard</NavDropdown.Item> : null}
-            </NavDropdown>
-            )}
-
-    const loggedOutNav = () => {
-        return(
-            <Nav.Link href="login">Log In</Nav.Link>
-        )
-    }
-
   return (
     <>
         <Navbar className="d-flex align-items-center navbar">
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
+        { user ? 
+        <>
             <Nav className="ml-auto">
                 <Container>
                     <Navbar.Brand href="/"><img src={LogoIcon} alt="logo" width="40" height="40"/>
@@ -52,9 +39,27 @@ function NavbarMain() {
                     <Nav.Link href="/clubs">Clubs</Nav.Link>
             </Nav>
             <Nav style={{"position": "absolute", "right": 10}}>
-                { !user ? loggedOutNav() : loggedInNav() }
+                <NavDropdown title={`Hello, ${user.first_name}`} id="basic-nav-dropdown">
+                    <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
+                    <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                </NavDropdown>
             </Nav>
-            </Navbar.Collapse>
+        </>
+        : 
+        <>
+        <Nav className="ml-auto">
+            <Container>
+                <Navbar.Brand href="/">
+                    <img src={LogoIcon} alt="logo" width="40" height="40"/>
+                </Navbar.Brand>
+            </Container>
+        </Nav>
+        <Nav style={{position: "absolute", right: 10}}>
+            <Nav.Link href="login">Log In</Nav.Link>
+        </Nav>
+        </>
+        }
+        </Navbar.Collapse>
         </Navbar>
     </>
 )};

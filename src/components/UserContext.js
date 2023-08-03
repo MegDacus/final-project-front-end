@@ -10,7 +10,7 @@ export function UserProvider({children}) {
        const fetchData = async () => {
         await getUser();
        }
-       fetchData();
+       fetchData()
       }, [])
 
     const getUser = async () => {

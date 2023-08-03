@@ -1,16 +1,30 @@
 import {useState, useEffect} from 'react';
 import {Container, Button, Form, Modal} from 'react-bootstrap';
 
-function AddDiscussionQuestion({show, handleClose}) {
-    const [question, setQuestion] = useState('');
+
+function AddDiscussionQuestion({show, handleClose, setQuestions, clubId}) {
+    const [questionBody, setQuestionBody] = useState('');
 
     function handleChange(e) {
-        setQuestion(e.target.value)
+        setQuestionBody(e.target.value)
     }
 
     function handleSubmit() {
-        console.log(question)
+        fetch('http://localhost:3000/bookclubs/'+clubId+'/discussion_questions', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                body: questionBody
+            })
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+            setQuestions((prevQuestions) => [...prevQuestions, data])})
+            handleClose();
     }
+    
    
     return(
         <Modal show={show} onHide={handleClose}>
@@ -21,6 +35,6 @@ function AddDiscussionQuestion({show, handleClose}) {
             </Modal.Body>
         </Modal>
     )
-}
+};
 
 export default AddDiscussionQuestion;

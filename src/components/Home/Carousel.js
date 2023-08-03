@@ -9,36 +9,49 @@ import StationEleven from '../../images/books/StationEleven.jpeg';
 import SongofAchilles from '../../images/books/SongofAchilles.jpeg';
 import TheSecretHistory from '../../images/books/TheSecretHistory.jpeg';
 import Image from 'react-bootstrap/Image'
-import { React, useState} from 'react';
+import { React, useState, useEffect} from 'react';
 
 function Carousel() {
     const [currentSlide, setCurrentSlide] = useState(0)
-    const [sliderRef, instanceRef] = useKeenSlider(
-            {
-                "loop": true,
-                "slides": {
-                    "perView": 7,
-                    "spacing": 10
-                },
-                slideChanged(slider) {
-                    setCurrentSlide(slider.track.details.rel)
-                }
-            }
-    )
+    const [books, setBooks] = useState([]);
+    const sliderOptions = {
+        'loop': true,
+        'renderMode': 'performance',
+        'slides': {
+            'perView': 7,
+            'spacing': 2
+        },
+    }
+    
+    const [sliderRef, slider] = useKeenSlider(sliderOptions)
+    
+    useEffect(() => { 
+            slider.current?.update({
+                ...sliderOptions
+            })
+    }, [slider, sliderOptions])
+
+    useEffect(() => {
+        getBooks();
+    }, [])
+
+    const getBooks = () => {
+        fetch('http://localhost:3000/books')
+        .then((resp) => (resp.json()))
+        .then((data) => {
+            setBooks(data)
+            console.log(data)
+        })
+    }
 
     return(
         <div className="navigation-wrapper">
         <div ref={sliderRef} className="d-flex keen-slider">
-            <div className="slider d-flex keen-slider__slide"><Image className="books" src={HappyPlace} alt="book cover" /></div>
-            <div className="slider d-flex keen-slider__slide"><Image className="books" src={FourthWing} alt="book cover"/></div>
-            <div className="slider d-flex keen-slider__slide"><Image className="books" src={StationEleven} alt="book cover"/></div>
-            <div className="slider d-flex keen-slider__slide"><Image className="books" src={SongofAchilles} alt="book cover"/></div>
-            <div className="slider d-flex keen-slider__slide"><Image className="books" src={TheWayofKings} alt="book cover"/></div>
-            <div className="d-flex slider keen-slider__slide"><Image className="books" src={JadeCity} alt="book cover"/></div>
-            <div className="d-flex slider keen-slider__slide"><Image className="books" src={Tomorrow} alt="book cover"/></div>
-            <div className="slider d-flex keen-slider__slide"><Image className="books" src={TheSecretHistory} alt="book cover"/></div>
-            <i onClick={(e) => e.stopPropagation() || instanceRef.current?.prev()} className="bi arrow arrow--left bi-caret-left-fill" style={{color: "#FFFFFF"}}></i>
-            <i onClick={(e) => e.stopPropagation() || instanceRef.current?.next()} className="bi arrow arrow--right bi-caret-right-fill" style={{color: "#FFFFFF"}}></i> 
+            { books && books.map((book) => (
+                <div className="slider d-flex keen-slider__slide"><Image style={{width: 120, height: 180, 'objectFit': 'cover'}} className="books" src={book.image_url} alt="book cover" /></div>
+            ))}
+            <i onClick={(e) => e.stopPropagation() || slider.current?.prev()} className="bi arrow arrow--left bi-caret-left-fill" style={{color: "#FFFFFF"}}></i>
+            <i onClick={(e) => e.stopPropagation() || slider.current?.next()} className="bi arrow arrow--right bi-caret-right-fill" style={{color: "#FFFFFF"}}></i> 
         </div>
         </div>
     )

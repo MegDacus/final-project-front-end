@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import './index.css';
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -13,14 +13,13 @@ import NewClub from './pages/NewClub';
 import Protected from './components/Protected';
 import Signup from './pages/Signup';
 import { UserProvider } from './components/UserContext';
-import AdminHome from './pages/AdminHome';
-import UserProfile from './pages/UserProfile';
 import Book from './pages/Book';
 import Club from './pages/Club';
 import Footer from './components/Footer';
+import UserDashboard from './pages/UserDashboard';
 
 function App() {
-  
+
   return (
     <React.StrictMode>
       <Router>
@@ -39,9 +38,9 @@ function App() {
             <Route path="/new-club" 
               element={<Protected ProtectedComponent={<NewClub/>} adminAccess={false}/>}>
             </Route>
-            <Route path="/admin-home" element={<Protected ProtectedComponent={<AdminHome/>} adminAccess={true}/>}></Route>
-          <Route path="/profile" element={<Protected ProtectedComponent={<UserProfile/>} adminAccess={false}/>}/>
+          <Route path="/dashboard" element={<Protected ProtectedComponent={<UserDashboard/>} adminAccess={false}/>}/>
           </Routes>
+          <Footer/>
           </UserProvider>
         </Router>
     </React.StrictMode>

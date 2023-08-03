@@ -1,10 +1,14 @@
-import { React, useEffect, useState } from "react";
-import { Container, Image, Row, Dropdown, Col } from "react-bootstrap";
+import { React, useEffect, useState, useContext } from "react";
+import { Container, Image, Row, Dropdown, Col, Button } from "react-bootstrap";
+import BookForm from '../components/Admin/BookForm';
+import UserContext from "../components/UserContext";
 
 function Library() {
   const [books, setBooks] = useState([]);
   const [sortedBooks, setSortedBooks] = useState([]);
   const [sortCategory, setSortCategory] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const {user} = useContext(UserContext);
 
   useEffect(() => {
     fetch("http://localhost:3000/books")
@@ -35,12 +39,23 @@ function Library() {
     }
   }
 
+  const toggleForm = () => {
+    setShowModal(!showModal)}
+
+  const handleClose = () => {
+    setShowModal(false);
+}
+  
+
   return (
     <>
       <Container className="mt-5 text-center">
         <Container className="mb-3 d-flex justify-content-between align-items-center">
           <Row style={{ width: "100%" }}>
-            <Col></Col>
+            <Col>
+                { user && user.is_admin ?  <Button onClick={toggleForm} variant="outline-secondary" id="bookButton" className="m-2" href="#">Add Book to Library</Button> : null}
+                <BookForm showModal={showModal} onClose={handleClose}/>
+            </Col>
             <Col>
               <h3>All Books</h3>
             </Col>

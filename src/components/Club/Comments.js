@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col, Card, CloseButton, Accordion } from "react-bootstrap";
+import {Row, Col, Card, Accordion } from "react-bootstrap";
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 
@@ -35,9 +35,8 @@ function Comments({ clubId, question }) {
 }
 
   return (
-    <Container className="mt-2" style={{ width: "100%" }}>
-      <Card>
-        <Card.Body className="p-4">
+        <>
+        <Card.Body className="p-4 overflow-auto" style={{height: comments.length > 0 ? 200 : null}}>
           <Row>
             <Col>
             {comments.length === 0 ? ( <p>No comments yet.</p>) : (
@@ -55,8 +54,7 @@ function Comments({ clubId, question }) {
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
-      </Card>
-    </Container>
+    </>
   );
 }
 

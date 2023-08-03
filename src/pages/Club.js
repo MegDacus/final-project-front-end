@@ -21,6 +21,7 @@ function Club() {
   const [showBookModal, setShowBookModal] = useState(false);
   const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [hostPic, setHostPic] = useState("");
+  const [questions, setQuestions] = useState('');
   const sliderOptions = {
     renderMode: "performance",
     slides: {
@@ -50,7 +51,8 @@ function Club() {
   async function fetchClub() {
     await fetch("http://localhost:3000/bookclubs/" + id).then((resp) =>
       resp.json().then((data) =>{ 
-          setClub(data)})
+          setClub(data)
+          setQuestions(data.discussion_questions)})
     );
   }
 
@@ -60,7 +62,12 @@ function Club() {
       header: {
         "Content-Type": "application/json",
       },
-    });
+    })
+    .then((resp) => {
+        if (resp.ok) {
+            setMembership(true)
+        }
+    })
   }
 
   async function getHostProfilePic() {
@@ -82,6 +89,19 @@ function Club() {
             setMembership(isMember)
         }
     })
+  }
+
+  async function handleLeaveClick() {
+      const membership = user.memberships.find((membership) => membership.bookclub_id === club.id)
+      
+      await fetch('http://localhost:3000/bookclubs/'+ id + '/memberships/'+ membership.id, {
+        method: "DELETE"
+      })
+      .then((resp) => {
+        if (resp.ok) {
+            setMembership(false);
+        }
+      })
   }
 
   function handleEditClick() {
@@ -108,14 +128,14 @@ function Club() {
     ...(club.previous_books?.genres?.split(", ") || [])
     ]
 
-    const uniqGenres = [...new Set(genres.map((genre) => genre))];
+  const uniqGenres = [...new Set(genres.map((genre) => genre))];
 
   return (
     <>
     {user ? <>
       <Image style={{ width: "100%", height: 250, "objectFit": 'cover' }} src={club.image_url} />
       <Container className="d-flex mt-5">
-        <Col md={5} lg={5}>
+        <Col md={4} lg={4}>
           <Container>
             <Container className="mt-2 d-flex justify-content-between">
               <h2>{club.name}</h2>
@@ -128,7 +148,7 @@ function Club() {
                 </Button>
               ) : null}
             </Container>
-            { club && <Container className="text-center mt-3 mb-3">
+            { club && <Container className="text-center mt-3">
               <Image style={{ width: 200, height: 200, 'objectFit': 'cover' }} src={hostPic} roundedCircle></Image>
               <h5>Hosted by {club.host.username}</h5>
             </Container> }
@@ -137,11 +157,6 @@ function Club() {
               <p>{club.description}</p>
               <h3>Genres</h3>
               { uniqGenres.map((genre) => (<li key={genre}> {genre}</li>))}
-              {club.memberships ? (
-                <Container>
-                  <h3>Current Club Members:</h3>
-                </Container>
-              ) : null}
               <h3>Previous Books:</h3>
               <Container ref={sliderRef} className="keen-slider">
                 {club &&
@@ -182,7 +197,16 @@ function Club() {
                   className="m-2"
                   variant="outline-secondary"
                 >
-                  Edit Club
+                Edit Club
+                </Button>
+              ) : 
+                membership && user.id !== club.host.id ? (
+                <Button
+                onClick={handleLeaveClick}
+                className="m-2"
+                variant="outline-secondary"
+                >
+                Leave Club
                 </Button>
               ) : (
                 <Button
@@ -196,7 +220,7 @@ function Club() {
             </Container>
           </Container>
         </Col>
-        <Col className="pr-3" md={8} lg={8}>
+        <Col className="pr-3" md={9} lg={9}>
           <Container>
             <Container className="d-flex justify-content-between p-2">
               <h3>This Month's Pick</h3>
@@ -211,7 +235,7 @@ function Club() {
               ) : null}
             </Container>
             {club.this_months_book ? (
-              <Container>
+              <Container className="p-2" fluid>
                 <Image
                   className="float-start p-2"
                   style={{ height: 200 }}
@@ -237,12 +261,12 @@ function Club() {
                   <AiOutlinePlus/>
                 </Button>) : null}
           </Container>
-            { membership ? <DiscussionQuestions clubId={id} questions={club.discussion_questions}/> : null}
+            { membership ? <DiscussionQuestions clubId={id} questions={questions} setQuestions={setQuestions} editView={editView}/> : null}
         </Col>
       </Container>
 
       <EditBookclubModal id={id} show={showEditModal} handleClose={handleClose} />
-      <AddDiscussionQuestion clubId={id} show={showQuestionModal} handleClose={handleClose}/>
+      <AddDiscussionQuestion clubId={id} show={showQuestionModal} handleClose={handleClose} setQuestions={setQuestions}/>
       <AddMonthlyBookForm show={showBookModal} handleClose={handleClose} />
     </> : <Spinner animation="border" variant="info"/>}
     </>

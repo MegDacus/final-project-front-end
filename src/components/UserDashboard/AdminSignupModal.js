@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
-import { Form, Button, Alert, Container } from "react-bootstrap";
+import { Form, Button, Alert, Container, Modal } from "react-bootstrap";
 
-function AdminSignupModal() {
+function AdminSignupModal({show, handleClose}) {
   const [formData, setFormData] = useState({
     username: "",
     first_name: "",
@@ -57,8 +57,11 @@ function AdminSignupModal() {
   };
 
   return (
-    <Container>
-    <Form onSubmit={handleSubmit}>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Create New Admin User</Modal.Title>
+      </Modal.Header>
+      <Form className="m-3" onSubmit={handleSubmit}>
       <Form.Group>
         <Form.Label>Username</Form.Label>
         <Form.Control
@@ -105,10 +108,10 @@ function AdminSignupModal() {
       <Button className="mt-3" type="submit">
         Create User
       </Button>
-    </Form>
+      </Form>
      { success ? <Alert className="mt-3" variant="success">New admin user has been successfully created.</Alert> : null}
      { errors ? <Alert className="mt-3" variant="danger">{errors}</Alert> : null }
-    </Container>
+    </Modal>
   );
 }
 

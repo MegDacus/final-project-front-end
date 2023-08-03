@@ -1,8 +1,8 @@
 import { React, useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button, Alert, Modal } from "react-bootstrap";
 import CreatableSelect from "react-select/creatable";
 
-function BookForm() {
+function BookForm({showModal, onClose}) {
   const [errors, setErrors] = useState(null);
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
@@ -66,70 +66,76 @@ const handleGenreChange = (selectedValues) => {
     console.log(formData);
   }
 
-
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group>
-        <Form.Label>Book Title</Form.Label>
-        <Form.Control
-          onChange={handleChange}
-          type="text"
-          name="title"
-          value={formData.title}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Author</Form.Label>
-        <Form.Control
-          onChange={handleChange}
-          type="text"
-          name="author"
-          value={formData.author}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Summary</Form.Label>
-        <Form.Control
-          onChange={handleChange}
-          as="textarea"
-          rows={3}
-          name="summary"
-          value={formData.summary}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Book Cover Image</Form.Label>
-        <Form.Control
-          onChange={handleChange}
-          type="text"
-          placeholder="Enter Image URL"
-          name="image_url"
-          value={formData.image_url}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Add Genres</Form.Label>
-        <CreatableSelect
-          isMulti
-          onChange={handleGenreChange}
-          options={genreOptions}
-        />
-      </Form.Group>
+    <Modal show={showModal} onHide={onClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Add Book to Library</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+      <Form className="mt-3 mb-5" onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Label>Book Title</Form.Label>
+          <Form.Control
+            onChange={handleChange}
+            type="text"
+            name="title"
+            value={formData.title}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Author</Form.Label>
+          <Form.Control
+            onChange={handleChange}
+            type="text"
+            name="author"
+            value={formData.author}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Summary</Form.Label>
+          <Form.Control
+            onChange={handleChange}
+            as="textarea"
+            rows={3}
+            name="summary"
+            value={formData.summary}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Book Cover Image</Form.Label>
+          <Form.Control
+            onChange={handleChange}
+            type="text"
+            placeholder="Enter Image URL"
+            name="image_url"
+            value={formData.image_url}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Add Genres</Form.Label>
+          <CreatableSelect
+            isMulti
+            onChange={handleGenreChange}
+            options={genreOptions}
+          />
+        </Form.Group>
 
-      <Button className="mt-3" type="submit">
-        Add Book
-      </Button>
-      {success ? (
-        <Alert className="mt-3" variant="success">
-          Book successfully added
-        </Alert>
-      ) : null}
-      {errors ? (
-        <Alert className="mt-3" variant="danger">
-          {errors}
-        </Alert>
-      ) : null}
-    </Form>
+        <Button className="mt-3" type="submit">
+          Add Book
+        </Button>
+        {success ? (
+          <Alert className="mt-3" variant="success">
+            Book successfully added
+          </Alert>
+        ) : null}
+        {errors ? (
+          <Alert className="mt-3" variant="danger">
+            {errors}
+          </Alert>
+        ) : null}
+      </Form>
+      </Modal.Body>
+    </Modal>
   );
 }
 
