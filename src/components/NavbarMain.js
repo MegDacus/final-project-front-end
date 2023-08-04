@@ -1,12 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap';
 import LogoIcon from '../images/logo-icon.png';
 import UserContext from '../components/UserContext';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
-function NavbarMain() {
-   const { user, setUser } = useContext(UserContext); 
+function NavbarMain({setUser}) {
+   const user = useContext(UserContext);
    const navigate = useNavigate();
+   const location = useLocation();
+   useEffect(() => {
+   }, [location])
+
+   const getUser = async () => {
+    await fetch('http://localhost:3000/me')
+    .then((r) => {
+        if (r.ok) {
+        } else {
+        }})}
    
    const handleLogout = () => { 
     fetch('http://localhost:3000/logout', {
@@ -45,7 +55,7 @@ function NavbarMain() {
                 </NavDropdown>
             </Nav>
         </>
-        : 
+        :
         <>
         <Nav className="ml-auto">
             <Container>

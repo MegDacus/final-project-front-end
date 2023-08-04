@@ -6,7 +6,7 @@ import UserContext from "../UserContext";
 
 function FeaturedCards() {
     const [featuredClubs, setFeaturedClubs] = useState([]);
-    const {user} = useContext(UserContext);
+    const user = useContext(UserContext);
 
     useEffect(() => {
         getClubs()
@@ -30,7 +30,7 @@ function FeaturedCards() {
                     <Row md={3} className="g-3 m-5 justify-content-center">
                         {featuredClubs.map((club => (
                         <Card key={club.id} className="m-1 p-3" style={{ width: 'calc(33.33% - 2rem)' }} >
-                        <Card.Img style={{height: 80, "object-fit": "cover"}} variant="top" src={club.image_url ? club.image_url : Placeholder}/>
+                        <Card.Img style={{height: 80, "objectFit": "cover"}} variant="top" src={club.image_url ? club.image_url : Placeholder}/>
                         <Card.Body>
                             <Card.Title>{club.name}</Card.Title>
                             <Card.Text>{club.description}</Card.Text>

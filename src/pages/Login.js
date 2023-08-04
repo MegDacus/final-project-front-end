@@ -5,16 +5,16 @@ import '../styles/Login.css'
 import LoginForm from '../components/Login/LoginForm';
 import Footer from '../components/Footer';
 
-function Login() {
+function Login({setUser}) {
 
 
 return (
     <>
-    <Container className="d-flex align-items-center justify-content-center m-5">
+    <Container className="d-flex align-items-center justify-content-center m-5 container-height">
         <div className="max-width-container ml-">
             <Image className='login_img' src={login_vector} alt="people reading books"/>
         </div>
-        <LoginForm/>
+        <LoginForm setUser={setUser}/>
     </Container>
     </>
 )

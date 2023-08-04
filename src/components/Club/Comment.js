@@ -5,7 +5,7 @@ import UserContext from '../UserContext';
 
 function Comment({comment, deleteComment}) {
     const [userImage, setUserImage] = useState('');
-    const {user} = useContext(UserContext);
+    const user = useContext(UserContext);
 
     useEffect(() => {
         if (!userImage) {

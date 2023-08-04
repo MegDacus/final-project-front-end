@@ -1,21 +1,11 @@
-import { React, useState, useContext } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Alert, Container, Button, Form } from "react-bootstrap";
+import {Modal, Alert, Container, Button, Form, Col } from "react-bootstrap";
 import UserContext from '../UserContext';
 
-function LoginForm() {
-  const [formData, setFormData] = useState({
-    "username": "",
-    "first_name": "",
-    "last_name": "",
-    "password": "",
-    "password_confirmation": "",
-  });
-
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState();
-  const { setUser } = useContext(UserContext);
-
+function LoginForm({setFormData, errors, formData}) {
+  const [show, setShow] = useState(false);
+  
   function handleChange(e) {
     setFormData({
       ...formData,
@@ -23,44 +13,16 @@ function LoginForm() {
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    const signUpDetails = {
-      ...formData,
-    };
-
-    fetch("http://localhost:3000/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(signUpDetails),
-    })
-      .then((r) => {
-        if (r.ok) {
-            r.json().then((data) => {
-            setUser({
-                "id": data.id, 
-                "username": data.username,
-                "first_name": data.first_name,
-                "last_name": data.last_name,
-                "memberships": data.memberships
-            })
-            navigate("/") })
-        } else {
-            r.json().then((e) => setErrors(Object.values(e).toString()))
-         }})
-      
-  }
+  useEffect(() => {
+    if (errors) {
+      setShow(true)
+    }
+  }, [errors])
 
   return (
-        <div className="loginDiv m-5">
-        <h2 className="loginText"> Create Account</h2>
-        <p className="detailsText"> Welcome! </p>
-        <p className="detailsText"> Please Enter Your Details.</p>
-
-        <Form onSubmit={handleSubmit}>
+    <Col md={5}>
+    <div md={5} style={{width: 430, height: 430}} className="d-flex align-items-center justify-content-center m-3">
+        <Form className="p-3" >
         <Form.Group className="formFields">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -106,21 +68,21 @@ function LoginForm() {
             value={formData.password_confirmation}
             />
         </Form.Group>
-        <Button className="mt-2" id="formButton" type="submit">
-            Sign Up
-        </Button>
+        <Modal bg="danger" onHide={() => setShow(false)} show={show} animation={true} centered={true}>
+          <Modal.Header className="bg-danger" closeButton>
+            Uh-Oh!
+          </Modal.Header>
+          <Modal.Body className="">
+          <ul>
+          {errors && errors.map((error)=> (
+            <li>{error}</li>
+          ))}
+          </ul>
+          </Modal.Body>
+          </Modal>
         </Form>
-        <Container className="d-flex mt-5 col-12">
-        <div className="col-9"><p id="accountQuestion">
-            Already have an account?
-        </p></div>
-        <div className="col-3"><a id="signUpLink" href="/login">
-            Log In
-        </a>
         </div>
-        </Container>
-        { errors ? <Alert variant="danger">{errors}</Alert> : null }
-    </div>
+        </Col>
     );
 }
 

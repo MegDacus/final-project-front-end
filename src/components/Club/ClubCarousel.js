@@ -5,8 +5,6 @@ import { React, useState, useEffect } from 'react';
 import Cover from '../../images/club-cover-photo.png'
 
 function ClubCarousel({clubs}) {
-    const [slides, setSlides] = useState([]);
-    const [currentSlide, setCurrentSlide] = useState(0)
     const sliderOptions = {
             'loop': true,
             'renderMode': 'performance',
@@ -31,7 +29,7 @@ function ClubCarousel({clubs}) {
         <Container ref={sliderRef} className="keen-slider">
             {clubs && clubs.map((bookclub) => (
                 <Card key={bookclub.id} className="keen-slider__slide" variant="light" border="light" style={{width: 200}}>
-                    <Card.Img variant="top" src={bookclub.image_url}/>
+                    <Card.Img style={{height: 100}} variant="top" src={bookclub.image_url}/>
                     <Card.Body>
                         <Card.Title>{bookclub.name}</Card.Title>
                         <Card.Text>

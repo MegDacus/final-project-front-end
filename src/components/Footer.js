@@ -7,16 +7,9 @@ function Footer() {
   return (
     <footer style={{bottom: 0, width: "100%"}} className="d-flex footer text-center">
         <Container className="pt-2">
-            <Row>
+            <Row className="align-items-center">
                 <Col>
-                    <ul className="list-unstyled">
-                        <li>
                             <a href="/clubs" className="text-dark">Join a Club</a>
-                        </li>
-                        <li>
-                            <a href="/new-club" className="text-dark">Start a Club</a>
-                        </li>
-                    </ul> 
                 </Col>
                 <Col>
                     <a
@@ -41,14 +34,7 @@ function Footer() {
                     </a>
                 </Col>
                 <Col>
-                    <ul className="list-unstyled">
-                        <li>
-                            <a href="#" className="text-dark">About Us</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-dark">FAQs</a>
-                        </li>
-                    </ul>
+                            <a href="/new-club" className="text-dark">Start a Club</a>
                 </Col>
             </Row>
         </Container>

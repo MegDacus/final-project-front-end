@@ -1,26 +1,29 @@
 import {React, useContext, useState} from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import UserContext from '../components/UserContext';
+import { useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
 
 function NewClub() {
     const user = useContext(UserContext);
     const [formDetails, setFormDetails] = useState({
         "name": "",
         "description": "",
-        "host_user_id": user.id,
+        "image_url": "",
     })
+    const [clubId, setClubId] = useState('');
+    const navigate = useNavigate();
 
     function handleChange(e) {
         setFormDetails({
             ...formDetails,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            host_user_id: user.id
         })
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-
-        console.log(formDetails)
 
         fetch('http://localhost:3000/bookclubs', {
             method: 'post', 
@@ -36,7 +39,8 @@ function NewClub() {
             return response.json();
         })
         .then((data) => {
-            console.log('Data recieved from the backend:', data);
+            setClubId(data.id)
+            navigate(`/clubs/${data.id}`)
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -47,7 +51,7 @@ function NewClub() {
 
     return(
         <>  
-            <Container style={{width: 500}}>
+            <Container style={{width: 500}} className="container-height">
                 <h3 className="text-center m-5">Create A Club</h3>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
@@ -71,12 +75,18 @@ function NewClub() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Club Cover Photo</Form.Label>
-                        <Form.Control type="file"/>
+                        <Form.Control 
+                        onChange={handleChange} 
+                        name="image_url" 
+                        value={formDetails.image_url}
+                        type="text" 
+                        placeholder="Enter Image URL here"/>
                     </Form.Group>
                     <br/>
                     <Button variant="outline-secondary" type="submit">Create Club</Button>
                 </Form>
             </Container>
+            <Footer/>
         </>
     )
 }

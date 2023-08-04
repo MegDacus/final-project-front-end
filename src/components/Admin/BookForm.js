@@ -1,10 +1,9 @@
-import { React, useState } from "react";
+import { React, useState, useRef } from "react";
 import { Form, Button, Alert, Modal } from "react-bootstrap";
 import CreatableSelect from "react-select/creatable";
 
-function BookForm({showModal, onClose}) {
+function BookForm({showModal, onClose, setBooks}) {
   const [errors, setErrors] = useState(null);
-  const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -31,14 +30,13 @@ function BookForm({showModal, onClose}) {
 ];
 const handleGenreChange = (selectedValues) => {
   const genres = selectedValues.map((value) => {
-    return value.value;
-  });
+    return value.value})
 
   setFormData({
       ...formData,
       genres: genres.join(', '),
-  })
-};
+  })}
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -52,18 +50,18 @@ const handleGenreChange = (selectedValues) => {
         .then((r) => {
         if (r.ok) {
             console.log(r)
-            setSuccess(true);
             setFormData({
                 "title": "",
                 "author": "",
                 "summary": "",
                 "image_url": ""
-            })
-
+            }) 
+            onClose()
+            r.json().then((data) => { setBooks((prevBooks) => [...prevBooks, data])})
         } else {
             r.json().then((e) => setErrors(Object.values(e).toString()))
         }})
-    console.log(formData);
+        
   }
 
   return (
@@ -114,6 +112,7 @@ const handleGenreChange = (selectedValues) => {
         <Form.Group>
           <Form.Label>Add Genres</Form.Label>
           <CreatableSelect
+            isClearable
             isMulti
             onChange={handleGenreChange}
             options={genreOptions}
@@ -123,11 +122,7 @@ const handleGenreChange = (selectedValues) => {
         <Button className="mt-3" type="submit">
           Add Book
         </Button>
-        {success ? (
-          <Alert className="mt-3" variant="success">
-            Book successfully added
-          </Alert>
-        ) : null}
+        
         {errors ? (
           <Alert className="mt-3" variant="danger">
             {errors}

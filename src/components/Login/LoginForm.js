@@ -3,14 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { Alert, Container, Button, Form } from "react-bootstrap";
 import UserContext from '../UserContext';
 
-function LoginForm() {
+function LoginForm({setUser}) {
   const [formData, setFormData] = useState({
     "username": "", 
     "password": ""
   });
   const navigate = useNavigate();
   const [errors, setErrors] = useState();
-  const { setUser } = useContext(UserContext);
 
   function handleChange(e) {
     setFormData({
@@ -19,14 +18,14 @@ function LoginForm() {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     const loginDetails = {
       ...formData,
     };
 
-    fetch("http://localhost:3000/login", {
+    await fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,15 +34,18 @@ function LoginForm() {
     })
       .then((r) => {
         if (r.ok) {
-            r.json().then((data) => {
+          r.json().then((data) => {
             setUser({
-                "id": data.id, 
-                "username": data.username,
-                "first_name": data.first_name,
-                "last_name": data.last_name,
-                "memberships": data.memberships
-            })
-            navigate("/") })
+              "id": data.id, 
+              "username": data.username,
+              "first_name": data.first_name,
+              "last_name": data.last_name,
+              "memberships": data.memberships,
+              "is_admin": data.is_admin,
+              "bookclubs": data.bookclubs,
+              "profile_pic": data.profile_pic
+            })})
+            navigate("/dashboard") 
         } else {
             r.json().then((e) => setErrors(Object.values(e).toString()))
          }})
@@ -74,10 +76,6 @@ function LoginForm() {
             name="password"
             value={formData.password}
             />
-            <Form.Text muted>
-            Your password must be 8-20 characters long, contain letters and
-            numbers, and must not contain spaces.
-            </Form.Text>
         </Form.Group>
         <br />
         <Button id="formButton" type="submit">

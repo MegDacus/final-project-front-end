@@ -48,7 +48,11 @@ function Carousel() {
         <div className="navigation-wrapper">
         <div ref={sliderRef} className="d-flex keen-slider">
             { books && books.map((book) => (
-                <div className="slider d-flex keen-slider__slide"><Image style={{width: 120, height: 180, 'objectFit': 'cover'}} className="books" src={book.image_url} alt="book cover" /></div>
+                <div key={book.id} className="slider d-flex keen-slider__slide">
+                    <a href={`books/${book.id}`}>
+                    <Image style={{width: 120, height: 180, 'objectFit': 'cover'}} className="books" src={book.image_url} alt="book cover" />
+                    </a>
+                </div>
             ))}
             <i onClick={(e) => e.stopPropagation() || slider.current?.prev()} className="bi arrow arrow--left bi-caret-left-fill" style={{color: "#FFFFFF"}}></i>
             <i onClick={(e) => e.stopPropagation() || slider.current?.next()} className="bi arrow arrow--right bi-caret-right-fill" style={{color: "#FFFFFF"}}></i> 

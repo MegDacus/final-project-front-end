@@ -5,9 +5,10 @@ import placeholder from '../images/club-cover-photo.png'
 import CreatableSelect from 'react-select/creatable';
 import UsersTable from '../components/UserDashboard/UsersTable';
 import AdminSignupModal from '../components/UserDashboard/AdminSignupModal';
+import Footer from '../components/Footer';
 
 function UserDashboard() {
-    const {user} = useContext(UserContext);
+    const user = useContext(UserContext);
     const [uploadedImage, setUploadedImage] = useState(null);
     const [profilePic, setProfilePic] = useState(null);
     const [showUsers, setShowUsers] = useState(false);
@@ -88,7 +89,8 @@ function UserDashboard() {
  
       
     return(
-        <Container className="d-flex">
+        <>
+        <Container className="d-flex" style={{height: '88vh'}}>
             <Container style={{width: 500}} className="m-5">
                 { user && <h1>{user.first_name} {user.last_name}</h1>}
                 {user && <Image className="mb-3 mt-3" src={profilePic} style={{height: 200, width: 200 }} roundedCircle/>}
@@ -133,10 +135,16 @@ function UserDashboard() {
                     </Card> : null 
                 ))}
                 </Row>
+                { user?.is_admin ? (
+                <>
                 <UsersTable show={showUsers} handleClose={handleClose}/>
-                <AdminSignupModal show={showAdminForm} handleClose={handleClose}/>
+                <AdminSignupModal show={showAdminForm} handleClose={handleClose}/> 
+                </>
+                ) : null }
             </Container>
         </Container>
+        <Footer/>
+        </>
     )
 }
 

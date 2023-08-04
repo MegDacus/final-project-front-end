@@ -9,17 +9,17 @@ import { useKeenSlider } from "keen-slider/react";
 import EditBookclubModal from "../components/Club/EditBookclubModal";
 import DiscussionQuestions from "../components/Club/DiscussionQuestions";
 import AddDiscussionQuestion from "../components/Club/AddDiscussionQuestion";
+import Footer from "../components/Footer";
 
 function Club() {
   const { id } = useParams();
   const [club, setClub] = useState("");
-  const { user } = useContext(UserContext);
+  const user = useContext(UserContext);
   const [members, setMembers] = useState([]);
   const [membership, setMembership] = useState('');
   const [editView, setEditView] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showBookModal, setShowBookModal] = useState(false);
-  const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [hostPic, setHostPic] = useState("");
   const [questions, setQuestions] = useState('');
   const sliderOptions = {
@@ -48,8 +48,8 @@ function Club() {
     getMembers();
   }, [club]);
 
-  async function fetchClub() {
-    await fetch("http://localhost:3000/bookclubs/" + id).then((resp) =>
+  function fetchClub() {
+    fetch("http://localhost:3000/bookclubs/" + id).then((resp) =>
       resp.json().then((data) =>{ 
           setClub(data)
           setQuestions(data.discussion_questions)})
@@ -120,7 +120,6 @@ function Club() {
   function handleClose() {
     setShowBookModal(false);
     setShowEditModal(false);
-    setShowQuestionModal(false)
 ;  }
 
   const genres = [
@@ -134,8 +133,8 @@ function Club() {
     <>
     {user ? <>
       <Image style={{ width: "100%", height: 250, "objectFit": 'cover' }} src={club.image_url} />
-      <Container className="d-flex mt-5">
-        <Col md={4} lg={4}>
+      <Container className="d-flex mt-5 mb-5">
+        <Col md={5} lg={5}>
           <Container>
             <Container className="mt-2 d-flex justify-content-between">
               <h2>{club.name}</h2>
@@ -167,11 +166,13 @@ function Club() {
                         style={{ width: 100 }}
                         key={book.id}
                       >
+                        <a href={`/books/${book.id}`}>
                         <Card.Img
                           style={{ width: 70, height: 100, objectFit: "cover" }}
                           variant="top"
                           src={book.image_url}
                         />
+                        </a>
                       </Card>
                     );
                   })}
@@ -180,7 +181,7 @@ function Club() {
                     e.stopPropagation() || slider?.current?.prev()
                   }
                   className="bi arrow arrow--left bi-caret-left-fill"
-                  style={{ color: "#FFFFFF" }}
+                  style={{ color: "#FFFFFF"}}
                 ></i>
                 <i
                   onClick={(e) =>
@@ -220,7 +221,7 @@ function Club() {
             </Container>
           </Container>
         </Col>
-        <Col className="pr-3" md={9} lg={9}>
+        <Col className="pr-3" md={8} lg={8}>
           <Container>
             <Container className="d-flex justify-content-between p-2">
               <h3>This Month's Pick</h3>
@@ -251,24 +252,15 @@ function Club() {
               <h5>No Current Book</h5>
             )}
           </Container>
-          <Container className="d-flex justify-content-between">
-          <h4>Discussion Questions</h4>
-            {editView ? (
-                <Button
-                  onClick={() => {setShowQuestionModal(true)}}
-                  variant="outline-secondary"
-                >
-                  <AiOutlinePlus/>
-                </Button>) : null}
-          </Container>
             { membership ? <DiscussionQuestions clubId={id} questions={questions} setQuestions={setQuestions} editView={editView}/> : null}
         </Col>
       </Container>
 
       <EditBookclubModal id={id} show={showEditModal} handleClose={handleClose} />
-      <AddDiscussionQuestion clubId={id} show={showQuestionModal} handleClose={handleClose} setQuestions={setQuestions}/>
+      
       <AddMonthlyBookForm show={showBookModal} handleClose={handleClose} />
     </> : <Spinner animation="border" variant="info"/>}
+        <Footer/>
     </>
   );
 }

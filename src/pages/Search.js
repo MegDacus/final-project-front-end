@@ -25,7 +25,7 @@ function Search() {
         <>
             <Container className="container-height m-5 text-center">
                 <Container className= "p-5">
-                    <Image className="mr-auto" src={banner} style={{width: 600}}/>
+                    <Image src={banner} style={{width: 600}}/>
                 </Container>
              <SearchBar onSearch={fetchFilteredData} />
              <Container className="mt-5">

@@ -1,10 +1,12 @@
 import {useState, useEffect} from 'react';
 import {Container, Card, Row, Col, Button, Modal} from 'react-bootstrap';
 import Comments from './Comments';
-import {AiOutlineDelete} from 'react-icons/ai'
+import {AiOutlineDelete, AiOutlinePlus} from 'react-icons/ai'
+import AddDiscussionQuestion from './AddDiscussionQuestion';
 
-function DiscussionQuestions({questions, clubId, editView, setQuestions}) {
+function DiscussionQuestions({questions, clubId, editView, setQuestions, handleClose}) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showQuestionModal, setShowQuestionModal] = useState(false);
 
     function deleteQuestion(questionId) {
         console.log(questionId)
@@ -19,16 +21,32 @@ function DiscussionQuestions({questions, clubId, editView, setQuestions}) {
         })
     }
     
+    function handleClose() {
+        setShowQuestionModal(false);
+    }
 
     return(
+        <>
+            
+        <Container className="d-flex justify-content-between">
+        <h4>Discussion Questions</h4>
+            {editView ? (
+                <Button
+                  onClick={() => {setShowQuestionModal(true)}}
+                  variant="outline-secondary"
+                >
+                  <AiOutlinePlus/>
+                </Button>) : null}
+          </Container>
         <Container fluid className="mt-3 mb-2 ">
-            {questions && questions.map((question) => (
+            { questions.length > 0 ? (
+                questions.map((question) => (
                     <Container fluid key={question.id} className="mt-2">
                     <Card>
-                        <Card.Header className="d-flex">
-                            <Row>
-                                <Col md={10}>{question.body}</Col>
-                                { editView ? <Col md={2} className="d-flex justify-content-end">
+                        <Card.Header>
+                            <Row className="d-flex">
+                                <Col sm={10}>{question.body}</Col>
+                                { editView ? <Col sm={2} className="d-flex justify-content-end">
                                     <Button id="delete" onClick={() => deleteQuestion(question.id)} className="p-0 m-0" style={{width: 30, height: 30}}variant="outline-secondary">
                                         <AiOutlineDelete style={{width: 15, height: 15}} />
                                     </Button>
@@ -38,7 +56,9 @@ function DiscussionQuestions({questions, clubId, editView, setQuestions}) {
                         <Comments question={question} clubId={clubId}/>
                         </Card>
                     </Container>
-            ))}
+            ))
+            ) : <p>There are not currently any discussion questions for this club.</p> }
+            <AddDiscussionQuestion clubId={clubId} show={showQuestionModal} handleClose={handleClose} setQuestions={setQuestions}/>
 
             {/* <Modal show={showDeleteModal} centered="true">
             <Modal.Header><Modal.Title>Are you sure?</Modal.Title></Modal.Header>
@@ -52,6 +72,7 @@ function DiscussionQuestions({questions, clubId, editView, setQuestions}) {
             </Modal> */}
 
         </Container>
+        </>
     )
 
 }

@@ -72,7 +72,7 @@ function Protected({ProtectedComponent, adminAccess}) {
             <Modal.Title>You aren't logged in!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            You'll need to log in to your account to access this function.
+            You'll need to log in to your account to access this page.
         </Modal.Body>
         <Modal.Footer>
             <Button variant="secondary" href="/login">
