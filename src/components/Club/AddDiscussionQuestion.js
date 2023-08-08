@@ -31,7 +31,7 @@ function AddDiscussionQuestion({show, handleClose, setQuestions, clubId}) {
             <Modal.Header closeButton>Add Discussion Question</Modal.Header>
             <Modal.Body>
                 <Form.Control type="text" placeholder="Enter Question Here" onChange={handleChange}/>
-                <Button onClick={handleSubmit} variant="light" className="mt-2">Post</Button>
+                <Button onClick={handleSubmit} variant="outline-secondary" className="mt-2">Post</Button>
             </Modal.Body>
         </Modal>
     )

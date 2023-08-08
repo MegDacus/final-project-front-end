@@ -1,4 +1,4 @@
-import {Container, Form, Button} from 'react-bootstrap';
+import {Container, Form, Button, InputGroup} from 'react-bootstrap';
 import {useState, useEffect} from 'react';
 
 function CommentForm({question, clubId, setComments}) {
@@ -25,10 +25,11 @@ function CommentForm({question, clubId, setComments}) {
             setComments((prevComments) => [...prevComments, data])})
     }
     return(
-        <Container>
+        <InputGroup className="mt-3">
+            <InputGroup.Text>Add Comment</InputGroup.Text>
             <Form.Control onChange={handleChange} type="text" placeholder="Type Comment Here"></Form.Control>
-            <Button onClick={handleSubmit} className="mt-2" variant="light">Post</Button>
-        </Container>
+            <Button onClick={handleSubmit} variant="outline-secondary">Post</Button>
+        </InputGroup>
     )
 }
 

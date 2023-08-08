@@ -20,18 +20,14 @@ import NotFound from './components/NotFound';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("running")
-    const fetchData = async () => {
-      if(!user) {
-        await getUser();
-      }
-    }
-    fetchData()
-   },[user])
+    getUser()
+   },[])
 
  const getUser = async () => {
+  try {
    await fetch('http://localhost:3000/me')
    .then((r) => {
      if (r.ok) {
@@ -48,8 +44,12 @@ function App() {
      })
    })} else {
      setUser(null);
-   }}
- )};
+   }})
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+  } finally {
+    setLoading(false);
+  }}
 
   return (
     <React.StrictMode>
@@ -59,16 +59,16 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home/>}></Route>
             <Route exact path="/search" element={<Search/>}></Route>
-            <Route exact path="/library" element={<Protected ProtectedComponent={<Library/>} adminAccess={false}/>}/>
-            <Route exact path="/books/:id" element={<Protected ProtectedComponent={<Book/>} adminAccess={false}/>}/>
-            <Route exact path="/clubs/:id" element={<Protected ProtectedComponent={<Club/>} adminAccess={false}/>}/>
+            <Route exact path="/library" element={<Protected ProtectedComponent={<Library/>} loading={loading}/>}/>
+            <Route exact path="/books/:id" element={<Protected ProtectedComponent={<Book/>} loading={loading} />}/>
+            <Route exact path="/clubs/:id" element={<Protected ProtectedComponent={<Club/>} loading={loading} />}/>
             <Route exact path="/login" element={<Login setUser={setUser}/>}></Route>
-            <Route exact path="/clubs" element={<Protected ProtectedComponent={<Clubs/>} adminAccess={false}/>}/>
+            <Route exact path="/clubs" element={<Protected ProtectedComponent={<Clubs/>} loading={loading} />}/>
             <Route exact path="/signup" element={<Signup setUser={setUser}/>}></Route>
             <Route exact path="/new-club" 
-              element={<Protected ProtectedComponent={<NewClub/>} adminAccess={false}/>}>
+              element={<Protected ProtectedComponent={<NewClub/>} loading={loading} />}>
             </Route>
-          <Route exact path="/dashboard" element={<Protected ProtectedComponent={<UserDashboard/>} adminAccess={false}/>}/>
+          <Route exact path="/dashboard" element={<Protected ProtectedComponent={<UserDashboard/>} loading={loading} />}/>
           <Route path="*" element={<NotFound/>}/>
           </Routes>
           </UserContext.Provider>

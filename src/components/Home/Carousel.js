@@ -40,7 +40,6 @@ function Carousel() {
         .then((resp) => (resp.json()))
         .then((data) => {
             setBooks(data)
-            console.log(data)
         })
     }
 

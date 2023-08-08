@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Row, Col, Card, Accordion } from "react-bootstrap";
+import {Row, Col, Card } from "react-bootstrap";
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 
@@ -46,14 +46,7 @@ function Comments({ clubId, question }) {
             </Col>
           </Row>
         </Card.Body>
-        <Accordion>
-            <Accordion.Item eventKey="0" >
-                <Accordion.Header>Add Comment</Accordion.Header>
-                <Accordion.Body>
-                    <CommentForm setComments={setComments} clubId={clubId} question={question}/>
-                </Accordion.Body>
-            </Accordion.Item>
-        </Accordion>
+        <CommentForm setComments={setComments} clubId={clubId} question={question}/>
     </>
   );
 }
