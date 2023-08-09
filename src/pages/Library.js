@@ -82,7 +82,7 @@ function Library() {
             </Col>
           </Row>
         </Container>
-        <Container>
+        <Container className="overflow-auto" style={{height: 540}}>
           <Row className="justify-content-center">
             {sortCategory ? (
                 sortedBooks.map((book) => (

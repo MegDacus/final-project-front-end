@@ -1,11 +1,11 @@
 import {React, useState, useContext, useEffect} from 'react';
 import UserContext from '../components/UserContext';
-import {Container, Form, InputGroup, Button, Card, Row, Image} from 'react-bootstrap';
+import {Container, Form, Button, Card, Row, Image} from 'react-bootstrap';
 import placeholder from '../images/club-cover-photo.png'
-import CreatableSelect from 'react-select/creatable';
 import UsersTable from '../components/UserDashboard/UsersTable';
 import AdminSignupModal from '../components/UserDashboard/AdminSignupModal';
 import Footer from '../components/Footer';
+import profilePlaceholder from '../images/new-placeholder.png';
 
 function UserDashboard() {
     const user = useContext(UserContext);
@@ -44,7 +44,6 @@ function UserDashboard() {
         })
     })
     .then((resp) => {
-        console.log(resp)
         getProfileImage();
         showChooseFile(false);
     })
@@ -57,13 +56,16 @@ function UserDashboard() {
         await fetch('http://localhost:3000/get_image/'+user.id)
         .then((data) => data.json())
         .then(resp => {
+            if (resp.ok) {
             const base64_string = ('data:image/png;base64,'+resp.image_data)
             setProfilePic(base64_string)
+            } else {
+                setProfilePic(profilePlaceholder);
+            }
         })
         .catch((error) => {
             console.error('Error loading image:', error);
         })
-        console.log(user.bookclubs)
     }
 
     const genreOptions = [
@@ -111,9 +113,10 @@ function UserDashboard() {
             </Container>
             <Container className="m-5">
                 <h2> Memberships:</h2>
-                <h4>Hosting:</h4>
+                { user && user.bookclubs.length > 0 ? (
+                <><h4>Hosting:</h4>
                 <Row>
-                {user && user.bookclubs.map((bookclub) => (
+                {user.bookclubs.map((bookclub) => (
                     bookclub.host.id === user.id ? <Card key={bookclub.id} variant="light" className="m-2" style={{width: '12rem'}}>
                         <Card.Img className="mt-2" variant="top" src={bookclub.image_url}></Card.Img>
                         <Card.Body>
@@ -125,7 +128,7 @@ function UserDashboard() {
                 </Row>
                 <h4>Enjoying:</h4>
                 <Row>
-                {user && user.bookclubs.map((bookclub) => (
+                {user.bookclubs.map((bookclub) => (
                     bookclub.host.id !== user.id ? <Card key={bookclub.id} variant="light" className="m-2" style={{width: '12rem'}}>
                         <Card.Img className="mt-2" variant="top" src={bookclub.image_url}></Card.Img>
                         <Card.Body>
@@ -135,6 +138,12 @@ function UserDashboard() {
                     </Card> : null 
                 ))}
                 </Row>
+                </>) : 
+                <>
+                <p className="text-muted">You currently hold no club memberships.</p>
+                <p>Interested in joining a club?
+                View our current clubs <a href="/clubs">here</a></p>
+                </>}
                 { user?.is_admin ? (
                 <>
                 <UsersTable show={showUsers} handleClose={handleClose}/>

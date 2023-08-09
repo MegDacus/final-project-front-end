@@ -132,7 +132,7 @@ function DiscussionQuestions({
               </Accordion>
             ))
           ) : (
-            <p>
+            <p className="text-muted">
               There are not currently any discussion questions for this club.
             </p>
           )}
@@ -144,7 +144,7 @@ function DiscussionQuestions({
           />
         </Container>
       ) : (
-        <p className="m-2">
+        <p className="m-3 text-muted">
           {" "}
           You must be a member of this club to view discussion questions
         </p>
