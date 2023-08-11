@@ -31,3 +31,7 @@
   height: 82vh;
 }
 
+.bold-header {
+  font-weight: 600;
+  font-style: oblique
+}

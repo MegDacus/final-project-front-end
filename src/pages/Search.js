@@ -23,17 +23,23 @@ function Search() {
 
     return (
         <>
-            <Container className="container-height m-5 text-center">
+            <Container className="container-height m-5 p-5 text-center">
                 <Container className= "p-5">
                     <Image src={banner} style={{width: 600}}/>
                 </Container>
              <SearchBar onSearch={fetchFilteredData} />
-             <Container className="mt-5">
+             <Container className="mt-5 mb-5">
                     {filteredData.map((item) => (
                         <Card className="p-3 m-3" key={item.id}>
                             <Row>
                                 <Col md={4} className="text-center">
-                                    {item.image_url && <Card.Img src={item.image_url} style={{ height: 200, width:150, objectFit: "cover"}}/>}
+                                    {item.image_url && <Card.Img src={item.image_url} 
+                                    style={
+                                        item.title
+                                          ? { height: 220, width: 150, objectFit: "cover" }
+                                          : item.name
+                                          ? { height: 130, width: 270, objectFit: "cover" }
+                                          : null} />}
                                 </Col>
                                 <Col md={8}>
                                     <Card.Title>{item.name ? item.name : item.title}</Card.Title>  

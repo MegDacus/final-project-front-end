@@ -45,6 +45,7 @@ function DiscussionQuestions({
   function handleModalClick(e, questionId) {
     if (e.target.id === "yes-button") {
         deleteQuestion(questionId)
+        handleClose()
     }
     if (e.target.id === "no-button") {
         handleClose()
@@ -91,7 +92,7 @@ function DiscussionQuestions({
                         </Button>
                       </Col>
                     ) : null}
-                    <Col sm={10}>{question.body}</Col>
+                    <Col sm={10}><p className="bold-header">{question.body}</p></Col>
                   </Accordion.Header>
                   <Accordion.Body
                     className="m-2"

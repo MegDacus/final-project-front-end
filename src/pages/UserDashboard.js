@@ -56,7 +56,8 @@ function UserDashboard() {
         await fetch('http://localhost:3000/get_image/'+user.id)
         .then((data) => data.json())
         .then(resp => {
-            if (resp.ok) {
+            console.log(resp)
+            if (resp.image_data) {
             const base64_string = ('data:image/png;base64,'+resp.image_data)
             setProfilePic(base64_string)
             } else {

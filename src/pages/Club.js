@@ -39,6 +39,7 @@ function Club() {
         setQuestions(data.discussion_questions);
         if (data.host) {
           getHostProfilePic(data.host.id);
+          user?.id === data.host.id ? setEditView(true) : setEditView(false)
         }
       });
   }
@@ -57,7 +58,9 @@ function Club() {
         console.log(data)
         const isMember = data.some((member) => member.user.id === user?.id);
         setMembership(isMember);
-      });
+        
+
+      })
   }
 
   async function handleJoinClick() {
@@ -169,7 +172,7 @@ function Club() {
                     >
                       {editView ? "View as Member" : "View Edit Mode"}
                     </Button>
-                  ) : user.id !== club.host.id ? (
+                  ) : membership && user.id !== club.host.id ? (
                     <Button
                       onClick={handleLeaveClick}
                       className="m-2"

@@ -21,13 +21,14 @@ function CommentForm({question, clubId, setComments}) {
         })
         .then((resp) => resp.json())
         .then((data) => {
-            console.log(data)
-            setComments((prevComments) => [...prevComments, data])})
+            setComments((prevComments) => [...prevComments, data])
+            setComment('');
+        })
     }
     return(
         <InputGroup className="mt-3">
             <InputGroup.Text>Add Comment</InputGroup.Text>
-            <Form.Control onChange={handleChange} type="text" placeholder="Type Comment Here"></Form.Control>
+            <Form.Control onChange={handleChange} value={comment} type="text" placeholder="Type Comment Here"></Form.Control>
             <Button onClick={handleSubmit} variant="outline-secondary">Post</Button>
         </InputGroup>
     )

@@ -12,7 +12,7 @@ function Home() {
     const user = useContext(UserContext)
 
     return (
-        <>  
+       FeaturedCards && Carousel && <div>  
             <Container id="home-banner" className= "d-flex p-5 align-items-center">
                 <Container>
                     <img src={BannerImage} alt="people reading" className="home-img mr-auto"/>
@@ -33,7 +33,7 @@ function Home() {
                    <p className="moving-text"> "I am not afraid of storms, for I am learning how to sail my ship." -"Little Women" by Louisa May Alcott   |   "They say nothing lasts forever but they're just scared it will last longer than they can love it." - "On Earth We're Briefly Gorgeous" by Ocean Vuong </p>
             </div>
             <Footer/>
-        </>
+        </div>
     )
 }
 
